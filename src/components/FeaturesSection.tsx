@@ -63,12 +63,12 @@ const FeatureCard = ({ feature, index, allCardsControls }: {
     >
       {/* Icon */}
       <div className="relative mb-6">
-        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center shadow-lg shadow-sky-500/30">
+        <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg" style={{ background: "linear-gradient(135deg, #006de4, #0052ab)", boxShadow: "0 10px 25px -5px rgba(0, 109, 228, 0.3)" }}>
           <feature.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
         </div>
         
         {/* Number badge */}
-        <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-sky-100 flex items-center justify-center font-display text-sm text-sky-600 shadow-md">
+        <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-blue-100 flex items-center justify-center font-display text-sm shadow-md" style={{ color: "#006de4" }}>
           {index + 1}
         </span>
       </div>
@@ -121,7 +121,7 @@ const FeaturesSection = () => {
       <div 
         className="absolute inset-0"
         style={{
-          background: "#66a7ee",
+          background: "#006de4",
         }}
       />
       
@@ -139,7 +139,7 @@ const FeaturesSection = () => {
       <div 
         className="absolute top-20 right-0 w-1/3 h-1/2"
         style={{
-          background: "linear-gradient(180deg, #7db8f5 0%, transparent 100%)",
+          background: "linear-gradient(180deg, #3d8ef0 0%, transparent 100%)",
           clipPath: "polygon(40% 0%, 100% 0%, 100% 60%, 0% 100%)",
           opacity: 0.4,
         }}
@@ -149,7 +149,7 @@ const FeaturesSection = () => {
       <div 
         className="absolute bottom-20 left-0 w-1/2 h-1/3"
         style={{
-          background: "linear-gradient(0deg, #4a8fd9 0%, transparent 100%)",
+          background: "linear-gradient(0deg, #0052ab 0%, transparent 100%)",
           clipPath: "polygon(0% 40%, 100% 0%, 100% 100%, 0% 100%)",
           opacity: 0.4,
         }}
