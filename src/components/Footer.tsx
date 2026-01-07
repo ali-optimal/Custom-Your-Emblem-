@@ -8,7 +8,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-black">
+    <footer className="relative bg-black mt-[50px]">
       {/* Curvy top edge */}
       <svg 
         className="absolute top-0 left-0 w-full h-16 -translate-y-full"
