@@ -27,83 +27,71 @@ const Header = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
         ${scrolled 
-          ? "bg-white/98 shadow-lg backdrop-blur-md py-2" 
-          : "bg-white py-4"
+          ? "bg-white/98 shadow-lg backdrop-blur-md py-3" 
+          : "bg-white py-5"
         }`}
     >
       <div className="container mx-auto px-6">
-        {/* Logo Section - Elegant Centered Design */}
-        <div className="flex flex-col items-center relative">
-          {/* Decorative line */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 w-12 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-          
-          <h1 
-            className={`font-display font-semibold tracking-[0.25em] uppercase text-gradient-luxury transition-all duration-500
-              ${scrolled ? "text-xl md:text-2xl" : "text-2xl md:text-3xl lg:text-4xl"}`}
-            style={{ 
-              letterSpacing: "0.2em",
-              textShadow: "0 2px 20px rgba(37, 99, 235, 0.1)"
-            }}
-          >
-            Your Custom Emblem
-          </h1>
-          
-          <div className="flex items-center gap-3 mt-2">
-            <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-primary/40" />
-            <span 
-              className={`font-body text-muted-foreground tracking-[0.35em] uppercase transition-all duration-500
-                ${scrolled ? "text-[10px]" : "text-xs md:text-sm"}`}
+        <div className="flex items-center justify-between">
+          {/* Logo Section - Left */}
+          <div className="flex flex-col">
+            <h1 
+              className={`font-display font-semibold tracking-[0.15em] uppercase text-gradient-luxury transition-all duration-500
+                ${scrolled ? "text-lg md:text-xl" : "text-xl md:text-2xl"}`}
             >
-              Specially designed for you
-            </span>
-            <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-primary/40" />
+              Your Custom Emblem
+            </h1>
+            
+            <div className="flex items-center gap-2 mt-1">
+              <span className="w-6 h-[1px] bg-gradient-to-r from-primary/40 to-transparent" />
+              <span 
+                className={`font-body text-muted-foreground tracking-[0.2em] uppercase transition-all duration-500
+                  ${scrolled ? "text-[9px]" : "text-[10px] md:text-xs"}`}
+              >
+                Specially designed for you
+              </span>
+            </div>
           </div>
 
-          {/* Decorative line */}
-          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent mt-4" />
-        </div>
-
-        {/* Desktop Navigation - Elegant Centered */}
-        <nav className="hidden lg:flex items-center justify-center gap-1 mt-4">
-          {navLinks.map((link, index) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setActiveLink(link.href)}
-              className="group relative px-5 py-3"
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              <span 
-                className={`relative z-10 font-body text-sm tracking-[0.15em] uppercase transition-all duration-300
-                  ${activeLink === link.href 
-                    ? "text-primary font-medium" 
-                    : "text-muted-foreground group-hover:text-primary"
-                  }`}
+          {/* Desktop Navigation - Right */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setActiveLink(link.href)}
+                className="group relative px-4 py-2"
               >
-                {link.name}
-              </span>
-              
-              {/* Animated underline */}
-              <span 
-                className={`absolute bottom-2 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-primary/60 via-primary to-primary/60 rounded-full transition-all duration-500 ease-out
-                  ${activeLink === link.href 
-                    ? "w-8 opacity-100" 
-                    : "w-0 opacity-0 group-hover:w-6 group-hover:opacity-70"
-                  }`}
-              />
-              
-              {/* Subtle hover glow */}
-              <span 
-                className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-            </a>
-          ))}
-        </nav>
+                <span 
+                  className={`relative z-10 font-body text-sm tracking-[0.1em] uppercase transition-all duration-300
+                    ${activeLink === link.href 
+                      ? "text-primary font-medium" 
+                      : "text-muted-foreground group-hover:text-primary"
+                    }`}
+                >
+                  {link.name}
+                </span>
+                
+                {/* Animated underline */}
+                <span 
+                  className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-primary/60 via-primary to-primary/60 rounded-full transition-all duration-500 ease-out
+                    ${activeLink === link.href 
+                      ? "w-6 opacity-100" 
+                      : "w-0 opacity-0 group-hover:w-5 group-hover:opacity-70"
+                    }`}
+                />
+                
+                {/* Subtle hover glow */}
+                <span 
+                  className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </a>
+            ))}
+          </nav>
 
-        {/* Mobile Menu Button */}
-        <div className="lg:hidden flex justify-center mt-4">
+          {/* Mobile Menu Button */}
           <button
-            className="relative p-3 text-muted-foreground hover:text-primary transition-colors duration-300 group"
+            className="lg:hidden relative p-3 text-muted-foreground hover:text-primary transition-colors duration-300 group"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -119,7 +107,7 @@ const Header = () => {
           className={`lg:hidden overflow-hidden transition-all duration-500 ease-out
             ${mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
         >
-          <nav className="py-6 mt-2 border-t border-primary/10">
+          <nav className="py-6 mt-4 border-t border-primary/10">
             <div className="flex flex-col items-center gap-1">
               {navLinks.map((link, index) => (
                 <a
