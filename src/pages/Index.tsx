@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import HeroCarousel from "@/components/HeroCarousel";
 import FeaturesSection from "@/components/FeaturesSection";
+import WorkSamplesSection from "@/components/WorkSamplesSection";
 
 const Index = () => {
   return (
@@ -8,6 +9,7 @@ const Index = () => {
       <Header />
       <HeroCarousel />
       <FeaturesSection />
+      <WorkSamplesSection />
       
       {/* Placeholder sections for future development */}
       <section id="testimonials" className="min-h-[50vh] bg-secondary/20" />
