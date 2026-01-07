@@ -59,14 +59,14 @@ const HeroCarousel = () => {
     intervalRef.current = setInterval(nextSlide, 4000);
   };
 
-  // Get position relative to active (circular)
+  // Get position relative to active (circular) - now showing all 4
   const getPosition = (index: number) => {
     const diff = (index - activeIndex + slides.length) % slides.length;
     if (diff === 0) return "center";
-    if (diff === 1) return "right";
-    if (diff === slides.length - 1) return "left";
-    if (diff === 2) return "far-right";
-    return "far-left";
+    if (diff === 1) return "right-1";
+    if (diff === 2) return "right-2";
+    if (diff === slides.length - 1) return "left-1";
+    return "hidden";
   };
 
   return (
@@ -93,54 +93,47 @@ const HeroCarousel = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2">
-        {/* Desktop Gallery - 3 images visible */}
-        <div className="hidden md:flex relative items-center justify-center h-[60vh] max-h-[520px]">
+        {/* Desktop Gallery - All 4 images visible */}
+        <div className="hidden md:flex relative items-center justify-center gap-3 h-[60vh] max-h-[520px]">
           {slides.map((slide, index) => {
             const position = getPosition(index);
             const isActive = position === "center";
             
-            // Style based on position
-            let transform = "";
-            let opacity = 0;
+            // Style based on position - all 4 visible
+            let opacity = 1;
             let zIndex = 10;
-            let width = "0%";
-            let scale = 0.85;
+            let flex = "0.5";
+            let height = "75%";
+            let grayscale = "60%";
             
             switch (position) {
               case "center":
-                transform = "translateX(0)";
                 opacity = 1;
                 zIndex = 30;
-                width = "50%";
-                scale = 1;
+                flex = "1.8";
+                height = "100%";
+                grayscale = "0%";
                 break;
-              case "left":
-                transform = "translateX(-8px)";
+              case "left-1":
                 opacity = 1;
                 zIndex = 20;
-                width = "22%";
-                scale = 0.95;
+                flex = "0.7";
+                height = "85%";
+                grayscale = "50%";
                 break;
-              case "right":
-                transform = "translateX(8px)";
+              case "right-1":
                 opacity = 1;
                 zIndex = 20;
-                width = "22%";
-                scale = 0.95;
+                flex = "0.7";
+                height = "85%";
+                grayscale = "50%";
                 break;
-              case "far-left":
-                transform = "translateX(-100%)";
-                opacity = 0;
-                zIndex = 10;
-                width = "0%";
-                scale = 0.8;
-                break;
-              case "far-right":
-                transform = "translateX(100%)";
-                opacity = 0;
-                zIndex = 10;
-                width = "0%";
-                scale = 0.8;
+              case "right-2":
+                opacity = 0.8;
+                zIndex = 15;
+                flex = "0.5";
+                height = "75%";
+                grayscale = "70%";
                 break;
             }
             
@@ -148,19 +141,17 @@ const HeroCarousel = () => {
               <div
                 key={index}
                 onClick={() => handleClick(index)}
-                className="relative overflow-hidden rounded-2xl cursor-pointer mx-1"
+                className="relative overflow-hidden rounded-2xl cursor-pointer"
                 style={{
-                  width,
-                  height: isActive ? "100%" : "88%",
-                  transform: `${transform} scale(${scale})`,
+                  flex,
+                  height,
                   opacity,
                   zIndex,
-                  filter: isActive ? "grayscale(0%)" : "grayscale(40%)",
+                  filter: `grayscale(${grayscale})`,
                   transition: "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
                   boxShadow: isActive 
                     ? "0 25px 50px -12px rgba(0, 0, 0, 0.4)" 
                     : "0 10px 30px -10px rgba(0, 0, 0, 0.25)",
-                  flexShrink: 0,
                 }}
               >
                 {/* Image */}
