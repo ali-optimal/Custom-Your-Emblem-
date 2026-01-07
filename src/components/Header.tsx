@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -13,61 +13,115 @@ const navLinks = [
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("#home");
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
+        ${scrolled 
+          ? "bg-white/98 shadow-lg backdrop-blur-md py-2" 
+          : "bg-white py-4"
+        }`}
+    >
       <div className="container mx-auto px-6">
-        {/* Logo Section - Centered */}
-        <div className="flex flex-col items-center py-5 border-b border-gray-100">
-          <h1 className="text-2xl md:text-3xl font-display font-semibold tracking-[0.2em] uppercase text-primary">
+        {/* Logo Section - Elegant Centered Design */}
+        <div className="flex flex-col items-center relative">
+          {/* Decorative line */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 w-12 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+          
+          <h1 
+            className={`font-display font-semibold tracking-[0.25em] uppercase text-gradient-luxury transition-all duration-500
+              ${scrolled ? "text-xl md:text-2xl" : "text-2xl md:text-3xl lg:text-4xl"}`}
+            style={{ 
+              letterSpacing: "0.2em",
+              textShadow: "0 2px 20px rgba(37, 99, 235, 0.1)"
+            }}
+          >
             Your Custom Emblem
           </h1>
-          <span className="text-xs md:text-sm font-body text-gray-400 tracking-[0.3em] mt-1">
-            Specially designed for you
-          </span>
+          
+          <div className="flex items-center gap-3 mt-2">
+            <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-primary/40" />
+            <span 
+              className={`font-body text-muted-foreground tracking-[0.35em] uppercase transition-all duration-500
+                ${scrolled ? "text-[10px]" : "text-xs md:text-sm"}`}
+            >
+              Specially designed for you
+            </span>
+            <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-primary/40" />
+          </div>
+
+          {/* Decorative line */}
+          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent mt-4" />
         </div>
 
-        {/* Desktop Navigation - Centered */}
-        <nav className="hidden lg:flex items-center justify-center gap-10 py-4">
-          {navLinks.map((link) => (
+        {/* Desktop Navigation - Elegant Centered */}
+        <nav className="hidden lg:flex items-center justify-center gap-1 mt-4">
+          {navLinks.map((link, index) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setActiveLink(link.href)}
-              className={`relative font-body text-sm tracking-wide transition-colors duration-300 pb-2
-                ${activeLink === link.href 
-                  ? "text-primary font-medium" 
-                  : "text-gray-500 hover:text-primary"
-                }
-                after:content-[''] after:absolute after:w-full after:h-[2px] after:bottom-0 after:left-0 
-                after:bg-primary after:transition-transform after:duration-300 after:origin-center
-                ${activeLink === link.href 
-                  ? "after:scale-x-100" 
-                  : "after:scale-x-0 hover:after:scale-x-100"
-                }
-              `}
+              className="group relative px-5 py-3"
+              style={{ animationDelay: `${index * 50}ms` }}
             >
-              {link.name}
+              <span 
+                className={`relative z-10 font-body text-sm tracking-[0.15em] uppercase transition-all duration-300
+                  ${activeLink === link.href 
+                    ? "text-primary font-medium" 
+                    : "text-muted-foreground group-hover:text-primary"
+                  }`}
+              >
+                {link.name}
+              </span>
+              
+              {/* Animated underline */}
+              <span 
+                className={`absolute bottom-2 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-primary/60 via-primary to-primary/60 rounded-full transition-all duration-500 ease-out
+                  ${activeLink === link.href 
+                    ? "w-8 opacity-100" 
+                    : "w-0 opacity-0 group-hover:w-6 group-hover:opacity-70"
+                  }`}
+              />
+              
+              {/* Subtle hover glow */}
+              <span 
+                className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
             </a>
           ))}
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="lg:hidden flex justify-center py-3">
+        <div className="lg:hidden flex justify-center mt-4">
           <button
-            className="p-2 text-gray-600"
+            className="relative p-3 text-muted-foreground hover:text-primary transition-colors duration-300 group"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <span className="absolute inset-0 rounded-full bg-primary/5 scale-0 group-hover:scale-100 transition-transform duration-300" />
+            <span className="relative z-10">
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </span>
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <nav className="lg:hidden py-4 border-t border-gray-100 animate-fade-in bg-white">
-            <div className="flex flex-col items-center gap-4">
-              {navLinks.map((link) => (
+        <div 
+          className={`lg:hidden overflow-hidden transition-all duration-500 ease-out
+            ${mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+        >
+          <nav className="py-6 mt-2 border-t border-primary/10">
+            <div className="flex flex-col items-center gap-1">
+              {navLinks.map((link, index) => (
                 <a
                   key={link.name}
                   href={link.href}
@@ -75,19 +129,25 @@ const Header = () => {
                     setActiveLink(link.href);
                     setMobileMenuOpen(false);
                   }}
-                  className={`font-body text-sm tracking-wide transition-colors duration-300 py-2
+                  className={`relative py-3 px-6 font-body text-sm tracking-[0.15em] uppercase transition-all duration-300
                     ${activeLink === link.href 
                       ? "text-primary font-medium" 
-                      : "text-gray-500 hover:text-primary"
-                    }
-                  `}
+                      : "text-muted-foreground hover:text-primary"
+                    }`}
+                  style={{ 
+                    animationDelay: `${index * 50}ms`,
+                    animation: mobileMenuOpen ? "fadeIn 0.4s ease-out forwards" : "none"
+                  }}
                 >
                   {link.name}
+                  {activeLink === link.href && (
+                    <span className="absolute left-1/2 -translate-x-1/2 bottom-1 w-4 h-[2px] bg-primary rounded-full" />
+                  )}
                 </a>
               ))}
             </div>
           </nav>
-        )}
+        </div>
       </div>
     </header>
   );
