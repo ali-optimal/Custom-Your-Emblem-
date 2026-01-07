@@ -23,45 +23,48 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="relative py-24 overflow-hidden bg-slate-900">
-      {/* Background with gradient */}
-      <div className="absolute inset-0">
-        {/* Main gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        
-        {/* Decorative glows */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
-        
-        {/* Top fade from white */}
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent" />
-        
-        {/* Subtle pattern */}
+    <section className="relative py-24 overflow-hidden">
+      {/* White background base */}
+      <div className="absolute inset-0 bg-white" />
+      
+      {/* Violet diagonal shape */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(135deg, #4338ca 0%, #3730a3 50%, #312e81 100%)",
+          clipPath: "polygon(0 8%, 100% 0%, 100% 92%, 0% 100%)",
+        }}
+      >
+        {/* Subtle pattern overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: "32px 32px",
+            backgroundSize: "24px 24px",
           }}
         />
+        
+        {/* Glowing accents */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-400/20 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-400/15 rounded-full blur-[100px]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16 pt-8">
           <div className="inline-flex items-center gap-3 mb-4">
-            <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-primary/60" />
-            <span className="font-body text-xs tracking-[0.3em] uppercase text-primary">
+            <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-white/50" />
+            <span className="font-body text-xs tracking-[0.3em] uppercase text-indigo-200">
               Why Choose Us
             </span>
-            <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-primary/60" />
+            <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-white/50" />
           </div>
           
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-6">
             Custom Made Design
           </h2>
           
-          <p className="max-w-3xl mx-auto font-body text-slate-300 leading-relaxed text-base md:text-lg">
+          <p className="max-w-3xl mx-auto font-body text-indigo-100/80 leading-relaxed text-base md:text-lg">
             Ready to offer personalized emblems to your friends and family or perhaps a treat for you as well to be installed on your car, bike... or anywhere you feel like?
           </p>
         </div>
@@ -71,35 +74,35 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 transition-all duration-500 hover:bg-white/10 hover:border-primary/30 hover:-translate-y-2"
+              className="group relative bg-white rounded-2xl p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
             >
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10" />
+              {/* Card glow on hover */}
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg -z-10" />
               
               {/* Icon */}
               <div className="relative mb-6">
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/40 transition-all duration-500">
-                  <feature.icon className="w-7 h-7 text-primary" strokeWidth={1.5} />
+                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-indigo-500/30">
+                  <feature.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
                 </div>
                 
                 {/* Number badge */}
-                <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-slate-800 border border-primary/30 flex items-center justify-center font-display text-sm text-primary">
+                <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-indigo-100 flex items-center justify-center font-display text-sm text-indigo-600 shadow-md">
                   {index + 1}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="font-display text-xl font-semibold text-white mb-4 group-hover:text-primary transition-colors duration-300">
+              <h3 className="font-display text-xl font-semibold text-slate-800 mb-4 group-hover:text-indigo-600 transition-colors duration-300">
                 {feature.title}
               </h3>
 
               {/* Description */}
-              <p className="font-body text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+              <p className="font-body text-sm text-slate-500 leading-relaxed">
                 {feature.description}
               </p>
 
               {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           ))}
         </div>
@@ -107,9 +110,9 @@ const FeaturesSection = () => {
         {/* Bottom decorative element */}
         <div className="flex justify-center mt-16">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-primary/40" />
-            <span className="w-3 h-3 rounded-full bg-primary" />
-            <span className="w-2 h-2 rounded-full bg-primary/40" />
+            <span className="w-2 h-2 rounded-full bg-white/40" />
+            <span className="w-3 h-3 rounded-full bg-white" />
+            <span className="w-2 h-2 rounded-full bg-white/40" />
           </div>
         </div>
       </div>
