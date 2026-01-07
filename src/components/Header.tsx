@@ -49,7 +49,7 @@ const Header = () => {
             {/* Logo Section - Left */}
             <div className="flex flex-col">
               <h1 
-                className={`font-display font-semibold tracking-[0.15em] uppercase text-white transition-all duration-500
+                className={`font-display font-semibold tracking-[0.15em] uppercase text-gradient-luxury transition-all duration-500
                   ${scrolled ? "text-lg md:text-xl" : "text-xl md:text-2xl"}`}
               >
                 Your Custom Emblem
@@ -76,10 +76,10 @@ const Header = () => {
                   className="group relative px-4 py-2"
                 >
                   <span 
-                    className={`relative z-10 font-body text-sm tracking-[0.1em] uppercase transition-all duration-300
+                    className={`relative z-10 font-body text-base tracking-[0.1em] uppercase font-semibold transition-all duration-300
                       ${activeLink === link.href 
-                        ? "text-primary font-medium" 
-                        : "text-white/70 group-hover:text-primary"
+                        ? "text-primary" 
+                        : "text-white group-hover:text-primary"
                       }`}
                   >
                     {link.name}

@@ -123,7 +123,7 @@ const HeroCarousel = () => {
               <div
                 key={index}
                 onClick={() => handleClick(index)}
-                className="relative overflow-hidden rounded-2xl cursor-pointer"
+                className="relative overflow-hidden rounded-2xl cursor-pointer border-2 border-white/30"
                 style={{
                   flex,
                   height,
@@ -197,7 +197,7 @@ const HeroCarousel = () => {
             return (
               <div
                 key={index}
-                className="absolute inset-0 overflow-hidden rounded-2xl"
+                className="absolute inset-0 overflow-hidden rounded-2xl border-2 border-white/30"
                 style={{
                   opacity: isActive ? 1 : 0,
                   transform: isActive ? "scale(1)" : "scale(0.95)",
