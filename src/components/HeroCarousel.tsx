@@ -70,10 +70,31 @@ const HeroCarousel = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen w-full bg-white pt-32 pb-16 overflow-hidden">
-      <div className="w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2">
-        {/* Gallery container - tighter gaps */}
-        <div className="relative flex items-center justify-center h-[60vh] max-h-[520px]">
+    <section id="home" className="relative min-h-screen w-full pt-32 pb-16 overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+        {/* Floating shapes */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/3 to-blue-200/20 rounded-full blur-3xl" />
+        
+        {/* Subtle grid pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.015]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+        
+        {/* Animated gradient lines */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2">
+        {/* Desktop Gallery - 3 images visible */}
+        <div className="hidden md:flex relative items-center justify-center h-[60vh] max-h-[520px]">
           {slides.map((slide, index) => {
             const position = getPosition(index);
             const isActive = position === "center";
@@ -190,6 +211,54 @@ const HeroCarousel = () => {
                 {!isActive && (
                   <div className="absolute inset-0 bg-black/10 hover:bg-black/0 transition-colors duration-300" />
                 )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mobile Gallery - Single full-width image */}
+        <div className="md:hidden relative h-[55vh] max-h-[450px]">
+          {slides.map((slide, index) => {
+            const isActive = index === activeIndex;
+            
+            return (
+              <div
+                key={index}
+                className="absolute inset-0 overflow-hidden rounded-2xl"
+                style={{
+                  opacity: isActive ? 1 : 0,
+                  transform: isActive ? "scale(1)" : "scale(0.95)",
+                  transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                  zIndex: isActive ? 20 : 10,
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.35)",
+                }}
+              >
+                {/* Image */}
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                
+                {/* Caption */}
+                <div 
+                  className="absolute bottom-0 left-0 right-0 p-5"
+                  style={{
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive ? "translateY(0)" : "translateY(10px)",
+                    transition: "all 0.5s ease-out 0.2s",
+                  }}
+                >
+                  <p className="font-body text-xs text-primary tracking-widest uppercase mb-1">
+                    {slide.subtitle}
+                  </p>
+                  <h2 className="font-display text-xl font-semibold text-white leading-tight">
+                    {slide.title}
+                  </h2>
+                </div>
               </div>
             );
           })}
