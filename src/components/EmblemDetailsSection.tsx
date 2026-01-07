@@ -3,13 +3,15 @@ import heroEmblem1 from "@/assets/hero-emblem-1.jpg";
 
 const EmblemDetailsSection = () => {
   return (
-    <section className="relative py-20 bg-gradient-to-t from-slate-100 via-slate-50/50 to-white overflow-hidden">
+    <section className="relative py-20 bg-white overflow-hidden">
+      {/* Subtle bottom gradient - only affects bottom portion */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-100/80 to-transparent" />
+      
       {/* Background decorations */}
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-gradient-to-tl from-blue-50 to-transparent rounded-full blur-3xl opacity-50" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-white to-transparent rounded-full blur-3xl opacity-50" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-gradient-to-tl from-blue-50 to-transparent rounded-full blur-3xl opacity-30" />
 
       <div className="relative z-10 container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch max-w-6xl mx-auto">
           {/* Image - Left side */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -26,7 +28,7 @@ const EmblemDetailsSection = () => {
             <div className="absolute -bottom-2 -right-2 w-16 h-16 border-r-3 border-b-3 rounded-br-xl" style={{ borderWidth: "3px", borderColor: "#006de4", borderLeft: "none", borderTop: "none" }} />
             
             {/* Main image */}
-            <div className="relative rounded-xl overflow-hidden shadow-2xl aspect-[3/4]">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl h-full">
               <img 
                 src={heroEmblem1} 
                 alt="Custom Emblem Details"
