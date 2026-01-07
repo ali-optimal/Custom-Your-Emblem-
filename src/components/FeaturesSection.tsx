@@ -1,6 +1,6 @@
 import { Palette, BadgeCheck, Truck } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
+import { useRef, useEffect } from "react";
 
 const features = [
   {
@@ -23,46 +23,130 @@ const features = [
   },
 ];
 
-const FeaturesSection = () => {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [allCardsLoaded, setAllCardsLoaded] = useState(false);
-  const [showSecondAnimation, setShowSecondAnimation] = useState(false);
+const FeatureCard = ({ feature, index, allCardsControls }: { 
+  feature: typeof features[0]; 
+  index: number;
+  allCardsControls: ReturnType<typeof useAnimation>;
+}) => {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
+  const controls = useAnimation();
 
   useEffect(() => {
     if (isInView) {
-      // After all cards have animated in (stagger * 3 + duration)
+      controls.start({
+        opacity: 1,
+        rotateY: 0,
+        rotateX: 0,
+        z: 0,
+        transition: {
+          duration: 0.8,
+          delay: index * 0.3,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }
+      });
+    }
+  }, [isInView, controls, index]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className="group relative bg-white rounded-2xl p-8 shadow-xl"
+      initial={{ 
+        opacity: 0, 
+        rotateY: -90,
+        rotateX: 15,
+        z: -200,
+      }}
+      animate={controls}
+      whileHover={{
+        rotateY: 8,
+        rotateX: -8,
+        z: 50,
+        scale: 1.05,
+        transition: { duration: 0.3 }
+      }}
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      {/* Card glow on hover */}
+      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg -z-10" />
+      
+      {/* Icon */}
+      <div className="relative mb-6">
+        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-indigo-500/30">
+          <feature.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
+        </div>
+        
+        {/* Number badge */}
+        <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-indigo-100 flex items-center justify-center font-display text-sm text-indigo-600 shadow-md">
+          {index + 1}
+        </span>
+      </div>
+
+      {/* Title */}
+      <h3 className="font-display text-xl font-semibold text-slate-800 mb-4 group-hover:text-indigo-600 transition-colors duration-300">
+        {feature.title}
+      </h3>
+
+      {/* Description */}
+      <p className="font-body text-sm text-slate-500 leading-relaxed">
+        {feature.description}
+      </p>
+
+      {/* Bottom accent line */}
+      <div className="absolute bottom-0 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    </motion.div>
+  );
+};
+
+const FeaturesSection = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const allCardsControls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      // After all cards have animated in, do the combined animation
       const timer = setTimeout(() => {
-        setAllCardsLoaded(true);
-        setTimeout(() => setShowSecondAnimation(true), 100);
-      }, 1500);
+        allCardsControls.start({
+          scale: [1, 1.03, 1],
+          rotateY: [0, 5, 0],
+          transition: { duration: 0.6, ease: "easeInOut" }
+        });
+      }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [isInView]);
+  }, [isInView, allCardsControls]);
 
   return (
     <section ref={sectionRef} className="relative py-32 overflow-hidden">
-      {/* Seamless gradient from white to violet */}
+      {/* SVG angled top */}
+      <svg 
+        className="absolute top-0 left-0 w-full h-24 md:h-32"
+        viewBox="0 0 1440 120" 
+        preserveAspectRatio="none"
+        fill="white"
+      >
+        <polygon points="0,0 1440,0 1440,40 0,120" />
+      </svg>
+
+      {/* Main violet background */}
       <div 
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(180deg, white 0%, #4f46e5 8%, #4338ca 50%, #3730a3 92%, white 100%)",
+          background: "linear-gradient(135deg, #4f46e5 0%, #4338ca 40%, #3730a3 100%)",
         }}
       />
       
-      {/* Angled accent shapes */}
-      <div 
-        className="absolute top-0 left-0 w-full h-32"
-        style={{
-          background: "linear-gradient(165deg, white 45%, transparent 45.5%)",
-        }}
-      />
-      <div 
-        className="absolute top-0 right-0 w-2/3 h-40"
-        style={{
-          background: "linear-gradient(195deg, white 35%, transparent 35.5%)",
-        }}
-      />
+      {/* SVG angled bottom */}
+      <svg 
+        className="absolute bottom-0 left-0 w-full h-24 md:h-32"
+        viewBox="0 0 1440 120" 
+        preserveAspectRatio="none"
+        fill="white"
+      >
+        <polygon points="0,80 1440,0 1440,120 0,120" />
+      </svg>
       
       {/* Secondary angled accent - top right */}
       <div 
@@ -84,28 +168,14 @@ const FeaturesSection = () => {
         }}
       />
       
-      {/* Bottom angled shapes */}
-      <div 
-        className="absolute bottom-0 left-0 w-full h-32"
-        style={{
-          background: "linear-gradient(345deg, white 45%, transparent 45.5%)",
-        }}
-      />
-      <div 
-        className="absolute bottom-0 left-0 w-2/3 h-40"
-        style={{
-          background: "linear-gradient(15deg, white 35%, transparent 35.5%)",
-        }}
-      />
-      
       {/* Geometric lines */}
       <div 
-        className="absolute top-[15%] left-0 right-0 h-[1px] bg-white/10"
-        style={{ transform: "rotate(-3deg)" }}
+        className="absolute top-[20%] left-0 right-0 h-[1px] bg-white/10"
+        style={{ transform: "rotate(-2deg)" }}
       />
       <div 
-        className="absolute bottom-[15%] left-0 right-0 h-[1px] bg-white/10"
-        style={{ transform: "rotate(3deg)" }}
+        className="absolute bottom-[20%] left-0 right-0 h-[1px] bg-white/10"
+        style={{ transform: "rotate(2deg)" }}
       />
       
       {/* Subtle pattern overlay */}
@@ -147,86 +217,20 @@ const FeaturesSection = () => {
         </motion.div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8" style={{ perspective: "1000px" }}>
+        <motion.div 
+          className="grid md:grid-cols-3 gap-6 lg:gap-8" 
+          style={{ perspective: "1200px" }}
+          animate={allCardsControls}
+        >
           {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              className="group relative bg-white rounded-2xl p-8 shadow-xl"
-              initial={{ 
-                opacity: 0, 
-                rotateY: -90,
-                rotateX: 15,
-                z: -200,
-              }}
-              animate={
-                showSecondAnimation
-                  ? {
-                      opacity: 1,
-                      rotateY: [0, 15, 0],
-                      rotateX: [0, -5, 0],
-                      z: [0, 50, 0],
-                      scale: [1, 1.05, 1],
-                    }
-                  : isInView
-                  ? { 
-                      opacity: 1, 
-                      rotateY: 0,
-                      rotateX: 0,
-                      z: 0,
-                    }
-                  : {}
-              }
-              transition={
-                showSecondAnimation
-                  ? {
-                      duration: 0.8,
-                      ease: "easeInOut",
-                    }
-                  : {
-                      duration: 0.8,
-                      delay: index * 0.3,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                    }
-              }
-              whileHover={{
-                rotateY: 5,
-                rotateX: -5,
-                z: 30,
-                scale: 1.02,
-                transition: { duration: 0.3 }
-              }}
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              {/* Card glow on hover */}
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg -z-10" />
-              
-              {/* Icon */}
-              <div className="relative mb-6">
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-indigo-500/30">
-                  <feature.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
-                </div>
-                
-                {/* Number badge */}
-                <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-indigo-100 flex items-center justify-center font-display text-sm text-indigo-600 shadow-md">
-                  {index + 1}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3 className="font-display text-xl font-semibold text-slate-800 mb-4 group-hover:text-indigo-600 transition-colors duration-300">
-                {feature.title}
-              </h3>
-
-              {/* Description */}
-              <p className="font-body text-sm text-slate-500 leading-relaxed">
-                {feature.description}
-              </p>
-
-              {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </motion.div>
+            <FeatureCard 
+              key={feature.title} 
+              feature={feature} 
+              index={index}
+              allCardsControls={allCardsControls}
+            />
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom decorative element */}
         <div className="flex justify-center mt-16">
