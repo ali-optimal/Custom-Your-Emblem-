@@ -39,13 +39,6 @@ const EmblemDetailsSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
             </div>
 
-            {/* Floating badge */}
-            <div 
-              className="absolute -bottom-4 -right-4 px-5 py-3 rounded-xl shadow-lg"
-              style={{ background: "linear-gradient(135deg, #006de4, #0052ab)" }}
-            >
-              <p className="font-display text-white text-sm font-medium">Premium Quality</p>
-            </div>
           </motion.div>
 
           {/* Text - Right side */}

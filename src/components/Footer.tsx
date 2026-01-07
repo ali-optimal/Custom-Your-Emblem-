@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Mail, CreditCard } from "lucide-react";
+import { Facebook, Instagram, CreditCard } from "lucide-react";
 
 const Footer = () => {
   const testimonials = [
@@ -8,27 +8,46 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-slate-100 border-t border-slate-200">
+    <footer className="relative bg-black">
+      {/* Curvy top edge */}
+      <svg 
+        className="absolute top-0 left-0 w-full h-16 -translate-y-full"
+        viewBox="0 0 1440 80" 
+        preserveAspectRatio="none"
+        fill="black"
+      >
+        <path d="M0,80 C360,0 1080,0 1440,80 L1440,80 L0,80 Z" />
+      </svg>
+
       {/* Main footer content */}
       <div className="container mx-auto px-6 py-12">
+        {/* Logo */}
+        <div className="mb-10 text-center md:text-left">
+          <h2 className="font-display text-2xl font-semibold tracking-[0.15em] uppercase text-gradient-luxury">
+            Your Custom Emblem
+          </h2>
+          <p className="font-body text-xs text-white/50 tracking-[0.2em] uppercase mt-1">
+            Specially designed for you
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           
           {/* Testimonials Column */}
           <div>
-            <h3 className="font-display text-lg font-semibold text-slate-700 mb-4">
+            <h3 className="font-display text-lg font-semibold text-white mb-4">
               Some Testimonials
             </h3>
             <div className="space-y-3">
               {testimonials.map((testimonial, index) => (
-                <p key={index} className="font-body text-sm text-slate-500 leading-relaxed">
+                <p key={index} className="font-body text-sm text-white/60 leading-relaxed">
                   -{testimonial}
                 </p>
               ))}
             </div>
             <a 
               href="#" 
-              className="inline-block mt-4 font-body text-sm transition-colors hover:underline"
-              style={{ color: "#006de4" }}
+              className="inline-block mt-4 font-body text-sm text-primary transition-colors hover:underline"
             >
               Add my testimonial
             </a>
@@ -36,16 +55,15 @@ const Footer = () => {
 
           {/* Your Emblem Picture Column */}
           <div>
-            <h3 className="font-display text-lg font-semibold text-slate-700 mb-4">
+            <h3 className="font-display text-lg font-semibold text-white mb-4">
               Your Emblem Picture
             </h3>
-            <div className="space-y-4 font-body text-sm text-slate-500 leading-relaxed">
+            <div className="space-y-4 font-body text-sm text-white/60 leading-relaxed">
               <p>
                 - Make sure to send us your Emblem picture at{" "}
                 <a 
                   href="mailto:sales@yourcustomemblem.com" 
-                  className="transition-colors hover:underline"
-                  style={{ color: "#006de4" }}
+                  className="text-primary transition-colors hover:underline"
                 >
                   sales@yourcustomemblem.com
                 </a>{" "}
@@ -57,8 +75,7 @@ const Footer = () => {
                   href="https://instagram.com/yourcustomemblem" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:underline"
-                  style={{ color: "#006de4" }}
+                  className="text-primary transition-colors hover:underline"
                 >
                   @yourcustomemblem
                 </a>{" "}
@@ -69,14 +86,14 @@ const Footer = () => {
 
           {/* Method of Payment Column */}
           <div>
-            <h3 className="font-display text-lg font-semibold text-slate-700 mb-4">
+            <h3 className="font-display text-lg font-semibold text-white mb-4">
               Method of Payment
             </h3>
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-white rounded-lg shadow-sm border border-slate-200">
-                <CreditCard className="w-8 h-8 text-slate-400" />
+              <div className="p-3 bg-white/10 rounded-lg border border-white/10">
+                <CreditCard className="w-8 h-8 text-white/60" />
               </div>
-              <div className="p-3 bg-white rounded-lg shadow-sm border border-slate-200">
+              <div className="p-3 bg-white/10 rounded-lg border border-white/10">
                 <img 
                   src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg" 
                   alt="PayPal" 
@@ -88,31 +105,28 @@ const Footer = () => {
 
           {/* Customer Support Column */}
           <div>
-            <h3 className="font-display text-lg font-semibold text-slate-700 mb-4">
+            <h3 className="font-display text-lg font-semibold text-white mb-4">
               Customer Support
             </h3>
             <div className="space-y-3">
               <div className="flex items-start gap-2">
-                <span className="font-body text-sm text-slate-500">Email:</span>
+                <span className="font-body text-sm text-white/60">Email:</span>
                 <a 
                   href="mailto:sales@yourcustomemblem.com"
-                  className="font-body text-sm transition-colors hover:underline"
-                  style={{ color: "#006de4" }}
+                  className="font-body text-sm text-primary transition-colors hover:underline"
                 >
                   sales@yourcustomemblem.com
                 </a>
               </div>
               <a 
                 href="#" 
-                className="block font-body text-sm transition-colors hover:underline"
-                style={{ color: "#006de4" }}
+                className="block font-body text-sm text-primary transition-colors hover:underline"
               >
                 Shipping and Order Tracking
               </a>
               <a 
                 href="#" 
-                className="block font-body text-sm transition-colors hover:underline"
-                style={{ color: "#006de4" }}
+                className="block font-body text-sm text-primary transition-colors hover:underline"
               >
                 General Terms and Conditions
               </a>
@@ -121,12 +135,12 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-slate-200 bg-slate-50">
+      {/* Bottom bar - Grey background */}
+      <div className="bg-slate-800">
         <div className="container mx-auto px-6 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Copyright */}
-            <p className="font-body text-sm text-slate-500">
+            <p className="font-body text-sm text-slate-400">
               Copyright © {new Date().getFullYear()} Your Custom Emblem. All Rights Reserved.
             </p>
 
@@ -136,17 +150,17 @@ const Footer = () => {
                 href="https://facebook.com/yourcustomemblem" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-slate-200 hover:bg-[#006de4] flex items-center justify-center transition-colors group"
+                className="w-9 h-9 rounded-full bg-slate-700 hover:bg-primary flex items-center justify-center transition-colors group"
               >
-                <Facebook className="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" />
+                <Facebook className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
               </a>
               <a 
                 href="https://instagram.com/yourcustomemblem" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-slate-200 hover:bg-[#006de4] flex items-center justify-center transition-colors group"
+                className="w-9 h-9 rounded-full bg-slate-700 hover:bg-primary flex items-center justify-center transition-colors group"
               >
-                <Instagram className="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" />
+                <Instagram className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
               </a>
             </div>
           </div>

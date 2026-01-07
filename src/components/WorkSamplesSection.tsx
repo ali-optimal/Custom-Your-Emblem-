@@ -31,20 +31,16 @@ const WorkSamplesSection = () => {
 
   return (
     <>
-      <section className="relative py-24 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
+      <section className="relative py-12 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden -mt-20">
         {/* Decorative background elements */}
         <div className="absolute top-20 left-10 w-32 h-32 border border-slate-200 rounded-full opacity-40" />
         <div className="absolute top-40 left-20 w-16 h-16 border border-slate-200 rounded-full opacity-30" />
         <div className="absolute bottom-20 right-10 w-40 h-40 border border-slate-200 rounded-full opacity-40" />
         <div className="absolute bottom-40 right-32 w-20 h-20 border border-slate-200 rounded-full opacity-30" />
-        
-        {/* Elegant line decorations */}
-        <div className="absolute top-1/3 left-0 w-32 h-[1px] bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
-        <div className="absolute top-2/3 right-0 w-32 h-[1px] bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
 
         <div className="relative z-10 container mx-auto px-6">
           {/* Section Header */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -62,15 +58,11 @@ const WorkSamplesSection = () => {
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-800 mb-4">
                 Work Samples
               </h2>
-              
-              <p className="max-w-2xl mx-auto font-body text-slate-500 leading-relaxed">
-                Discover the artistry behind each custom emblem. Click to explore our premium creations.
-              </p>
             </motion.div>
           </div>
 
-          {/* Samples Grid - Elegant card style */}
-          <div className="grid md:grid-cols-3 gap-10 lg:gap-14 max-w-6xl mx-auto">
+          {/* Samples Grid - Simple large images */}
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
             {samples.map((sample, index) => (
               <motion.div
                 key={sample.id}
@@ -81,61 +73,25 @@ const WorkSamplesSection = () => {
                 className="group cursor-pointer"
                 onClick={() => setSelectedImage(sample)}
               >
-                {/* Elegant frame container */}
-                <div className="relative">
-                  {/* Outer decorative frame */}
-                  <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-slate-100 via-white to-slate-100 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Main image container with arch top */}
-                  <div className="relative overflow-hidden rounded-t-[6rem] rounded-b-2xl bg-white shadow-xl group-hover:shadow-2xl transition-shadow duration-500">
-                    {/* Blue accent bar at top */}
-                    <div 
-                      className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-b-full z-20"
-                      style={{ background: "#006de4" }}
+                {/* Simple image container */}
+                <div className="relative overflow-hidden rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                  <div className="relative aspect-square overflow-hidden">
+                    <img 
+                      src={sample.image} 
+                      alt={sample.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     
-                    {/* Image */}
-                    <div className="relative aspect-[3/4] overflow-hidden">
-                      <img 
-                        src={sample.image} 
-                        alt={sample.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      {/* Zoom icon */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-500">
-                          <ZoomIn className="w-6 h-6" style={{ color: "#006de4" }} />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom content area */}
-                    <div className="relative p-6 bg-white">
-                      {/* Decorative corner elements */}
-                      <div className="absolute top-0 left-4 w-8 h-[2px] bg-gradient-to-r from-slate-200 to-transparent" />
-                      <div className="absolute top-0 right-4 w-8 h-[2px] bg-gradient-to-l from-slate-200 to-transparent" />
-                      
-                      <h3 className="font-display text-xl font-semibold text-slate-800 text-center group-hover:text-[#006de4] transition-colors duration-300">
-                        {sample.title}
-                      </h3>
-                      <p className="font-body text-sm text-slate-400 text-center mt-2">
-                        {sample.description}
-                      </p>
-                      
-                      {/* Bottom accent */}
-                      <div className="flex justify-center mt-4">
-                        <div className="w-12 h-[2px] rounded-full bg-gradient-to-r from-transparent via-slate-200 to-transparent group-hover:via-[#006de4] transition-colors duration-500" />
+                    {/* Gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    {/* Zoom icon */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                        <ZoomIn className="w-6 h-6" style={{ color: "#006de4" }} />
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Side decorative elements */}
-                  <div className="absolute top-1/2 -left-2 w-1 h-12 rounded-full bg-gradient-to-b from-transparent via-slate-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute top-1/2 -right-2 w-1 h-12 rounded-full bg-gradient-to-b from-transparent via-slate-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               </motion.div>
             ))}
