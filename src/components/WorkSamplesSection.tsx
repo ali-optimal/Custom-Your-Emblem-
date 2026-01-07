@@ -142,7 +142,7 @@ const WorkSamplesSection = () => {
           </div>
 
           {/* Decorative bottom element */}
-          <div className="flex justify-center mt-20">
+          <div className="flex justify-center mt-12">
             <div className="flex items-center gap-4">
               <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-slate-300" />
               <div className="w-2 h-2 rounded-full" style={{ background: "#006de4" }} />
