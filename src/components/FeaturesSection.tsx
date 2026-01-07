@@ -109,12 +109,12 @@ const FeaturesSection = () => {
     <section ref={sectionRef} className="relative pt-16 pb-32 overflow-hidden -mt-8">
       {/* SVG angled top - steeper angle */}
       <svg 
-        className="absolute top-0 left-0 w-full h-32 md:h-48 z-10"
-        viewBox="0 0 1440 150" 
+        className="absolute top-0 left-0 w-full h-16 md:h-24 z-10"
+        viewBox="0 0 1440 100" 
         preserveAspectRatio="none"
         fill="white"
       >
-        <polygon points="0,0 1440,0 1440,0 0,150" />
+        <polygon points="0,0 1440,0 1440,0 0,100" />
       </svg>
 
       {/* Main background */}
