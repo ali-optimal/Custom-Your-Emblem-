@@ -106,7 +106,7 @@ const FeaturesSection = () => {
   }, [isInView, allCardsControls]);
 
   return (
-    <section ref={sectionRef} className="relative py-32 overflow-hidden">
+    <section ref={sectionRef} className="relative pt-16 pb-32 overflow-hidden -mt-8">
       {/* SVG angled top - steeper angle */}
       <svg 
         className="absolute top-0 left-0 w-full h-32 md:h-48 z-10"
