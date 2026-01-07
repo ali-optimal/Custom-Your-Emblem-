@@ -1,11 +1,13 @@
 import Header from "@/components/Header";
 import HeroCarousel from "@/components/HeroCarousel";
+import FeaturesSection from "@/components/FeaturesSection";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <HeroCarousel />
+      <FeaturesSection />
       
       {/* Placeholder sections for future development */}
       <section id="testimonials" className="min-h-[50vh] bg-secondary/20" />
