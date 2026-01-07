@@ -31,105 +31,81 @@ const HeroCarousel = () => {
     setActiveIndex((prev) => (prev + 1) % slides.length);
   }, []);
 
-  // Auto-scroll every 5 seconds
+  // Auto-scroll every 4 seconds
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
+    const interval = setInterval(nextSlide, 4000);
     return () => clearInterval(interval);
   }, [nextSlide]);
 
-  // Calculate position for each slide: -1 (left), 0 (center), 1 (right)
-  const getPosition = (index: number) => {
-    const diff = index - activeIndex;
-    if (diff === 0) return 0;
-    if (diff === 1 || diff === -(slides.length - 1)) return 1;
-    if (diff === -1 || diff === slides.length - 1) return -1;
-    return diff > 0 ? 2 : -2; // Off-screen
+  // Get indices for the 3 visible slides
+  const getVisibleIndices = () => {
+    const prev = (activeIndex - 1 + slides.length) % slides.length;
+    const next = (activeIndex + 1) % slides.length;
+    return [prev, activeIndex, next];
   };
+
+  const visibleIndices = getVisibleIndices();
 
   return (
     <section id="home" className="relative min-h-screen w-full bg-white pt-36 pb-16 overflow-hidden">
+      {/* Main content container */}
       <div className="container mx-auto px-4 md:px-6">
         {/* Gallery container */}
-        <div className="relative flex items-center justify-center h-[65vh] max-h-[550px]">
-          {slides.map((slide, index) => {
-            const position = getPosition(index);
-            const isActive = position === 0;
-            const isVisible = Math.abs(position) <= 1;
-
+        <div className="flex items-center justify-center gap-3 md:gap-5 h-[65vh] max-h-[550px]">
+          {visibleIndices.map((slideIndex, position) => {
+            const slide = slides[slideIndex];
+            const isActive = position === 1;
+            
             return (
               <div
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className="absolute cursor-pointer overflow-hidden rounded-2xl"
+                key={slideIndex}
+                onClick={() => setActiveIndex(slideIndex)}
+                className={`relative overflow-hidden rounded-xl cursor-pointer
+                  transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]
+                  ${isActive 
+                    ? "flex-[2.5] h-full shadow-2xl" 
+                    : "flex-[0.6] h-[80%] grayscale-[70%] hover:grayscale-[30%] opacity-80 hover:opacity-100"
+                  }`}
                 style={{
-                  width: isActive ? "55%" : "18%",
-                  height: isActive ? "100%" : "75%",
-                  transform: `translateX(${position * (isActive ? 0 : position === -1 ? -190 : 190)}%) scale(${isActive ? 1 : 0.95})`,
-                  zIndex: isActive ? 10 : 5,
-                  opacity: isVisible ? 1 : 0,
-                  filter: isActive ? "none" : "grayscale(50%)",
-                  boxShadow: isActive 
-                    ? "0 25px 50px -12px rgba(0, 0, 0, 0.35)" 
-                    : "0 10px 30px -10px rgba(0, 0, 0, 0.2)",
-                  transition: "all 1.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                  transitionProperty: 'flex, height, filter, opacity, box-shadow',
                 }}
               >
-                {/* Image with Ken Burns effect */}
-                <div 
-                  className="w-full h-full overflow-hidden"
-                  style={{
-                    transition: "transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                  }}
-                >
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className="w-full h-full object-cover"
-                    style={{
-                      transform: isActive ? "scale(1)" : "scale(1.1)",
-                      transition: "transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                    }}
-                  />
-                </div>
-                
-                {/* Gradient overlay */}
-                <div 
-                  className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-                  style={{
-                    opacity: isActive ? 1 : 0.4,
-                    transition: "opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                  }}
+                {/* Image */}
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className={`w-full h-full object-cover transition-transform duration-1000 ease-out ${
+                    isActive ? "scale-100" : "scale-105 hover:scale-100"
+                  }`}
                 />
                 
-                {/* Caption */}
-                <div 
-                  className="absolute bottom-0 left-0 right-0 p-6 md:p-8"
-                  style={{
-                    opacity: isActive ? 1 : 0,
-                    transform: isActive ? "translateY(0)" : "translateY(20px)",
-                    transition: "all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s",
-                  }}
-                >
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <p className="font-body text-sm text-white/80 tracking-widest uppercase mb-2">
-                        {slide.subtitle}
-                      </p>
-                      <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
-                        {slide.title}
-                      </h2>
+                {/* Overlay gradient for active slide */}
+                {isActive && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                )}
+                
+                {/* Caption - only on active slide */}
+                {isActive && (
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                    <div className="flex items-end justify-between">
+                      <div className="transform transition-all duration-500 delay-200">
+                        <p className="font-body text-sm text-white/80 tracking-widest uppercase mb-2">
+                          {slide.subtitle}
+                        </p>
+                        <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                          {slide.title}
+                        </h2>
+                      </div>
+                      <span className="font-body text-sm text-white/60">
+                        {slide.year}
+                      </span>
                     </div>
-                    <span className="font-body text-sm text-white/60 hidden md:block">
-                      {slide.year}
-                    </span>
                   </div>
-                </div>
-
-                {/* Hover overlay for inactive */}
+                )}
+                
+                {/* Subtle overlay for inactive slides */}
                 {!isActive && (
-                  <div 
-                    className="absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-500"
-                  />
+                  <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors duration-300" />
                 )}
               </div>
             );
@@ -137,37 +113,21 @@ const HeroCarousel = () => {
         </div>
         
         {/* Slide indicators */}
-        <div className="flex justify-center gap-3 mt-10">
+        <div className="flex justify-center gap-3 mt-8">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setActiveIndex(index)}
-              className="relative h-1.5 rounded-full overflow-hidden transition-all duration-500"
-              style={{
-                width: index === activeIndex ? "48px" : "16px",
-                backgroundColor: index === activeIndex ? "hsl(var(--primary))" : "#d1d5db",
-              }}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                index === activeIndex
+                  ? "w-10 bg-primary"
+                  : "w-4 bg-gray-300 hover:bg-gray-400"
+              }`}
               aria-label={`Go to slide ${index + 1}`}
-            >
-              {index === activeIndex && (
-                <div 
-                  className="absolute inset-0 bg-primary/50 origin-left animate-[progress_5s_linear]"
-                  style={{
-                    animation: "progress 5s linear forwards",
-                  }}
-                />
-              )}
-            </button>
+            />
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes progress {
-          from { transform: scaleX(0); }
-          to { transform: scaleX(1); }
-        }
-      `}</style>
     </section>
   );
 };
