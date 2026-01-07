@@ -12,40 +12,50 @@ const navLinks = [
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("#home");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex flex-col">
-            <h1 className="text-xl md:text-2xl font-display font-bold text-gradient-luxury tracking-wide">
-              Your Custom Emblem
-            </h1>
-            <span className="text-xs md:text-sm font-body text-gray-500 tracking-widest uppercase">
-              Specially designed for you
-            </span>
-          </div>
+        {/* Logo Section - Centered */}
+        <div className="flex flex-col items-center py-5 border-b border-gray-100">
+          <h1 className="text-2xl md:text-3xl font-display font-semibold tracking-[0.2em] uppercase text-primary">
+            Your Custom Emblem
+          </h1>
+          <span className="text-xs md:text-sm font-body text-gray-400 tracking-[0.3em] mt-1">
+            Specially designed for you
+          </span>
+        </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="relative font-body text-sm font-medium text-gray-700 hover:text-primary transition-colors duration-300 
-                  after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-[-4px] after:left-0 
-                  after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 
-                  hover:after:scale-x-100 hover:after:origin-bottom-left"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
+        {/* Desktop Navigation - Centered */}
+        <nav className="hidden lg:flex items-center justify-center gap-10 py-4">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setActiveLink(link.href)}
+              className={`relative font-body text-sm tracking-wide transition-colors duration-300 pb-2
+                ${activeLink === link.href 
+                  ? "text-primary font-medium" 
+                  : "text-gray-500 hover:text-primary"
+                }
+                after:content-[''] after:absolute after:w-full after:h-[2px] after:bottom-0 after:left-0 
+                after:bg-primary after:transition-transform after:duration-300 after:origin-center
+                ${activeLink === link.href 
+                  ? "after:scale-x-100" 
+                  : "after:scale-x-0 hover:after:scale-x-100"
+                }
+              `}
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
 
-          {/* Mobile Menu Button */}
+        {/* Mobile Menu Button */}
+        <div className="lg:hidden flex justify-center py-3">
           <button
-            className="lg:hidden p-2 text-gray-700"
+            className="p-2 text-gray-600"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -55,14 +65,22 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="lg:hidden py-6 border-t border-gray-100 animate-fade-up bg-white">
-            <div className="flex flex-col gap-4">
+          <nav className="lg:hidden py-4 border-t border-gray-100 animate-fade-in bg-white">
+            <div className="flex flex-col items-center gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="font-body text-base font-medium text-gray-700 hover:text-primary transition-colors duration-300 py-2"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setActiveLink(link.href);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`font-body text-sm tracking-wide transition-colors duration-300 py-2
+                    ${activeLink === link.href 
+                      ? "text-primary font-medium" 
+                      : "text-gray-500 hover:text-primary"
+                    }
+                  `}
                 >
                   {link.name}
                 </a>
