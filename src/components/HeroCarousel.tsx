@@ -70,27 +70,9 @@ const HeroCarousel = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen w-full pt-32 pb-16 overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-        {/* Floating shapes */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/3 to-blue-200/20 rounded-full blur-3xl" />
-        
-        {/* Subtle grid pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.015]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-        
-        {/* Animated gradient lines */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
-      </div>
+    <section id="home" className="relative min-h-screen w-full pt-32 pb-16 overflow-hidden bg-white">
+      {/* Clean white background with subtle accent */}
+      <div className="absolute inset-0 bg-white" />
 
       <div className="relative z-10 w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2">
         {/* Desktop Gallery - All 4 images visible */}
