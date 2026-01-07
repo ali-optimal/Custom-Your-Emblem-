@@ -47,11 +47,11 @@ const HeroCarousel = () => {
   const visibleIndices = getVisibleIndices();
 
   return (
-    <section id="home" className="relative min-h-screen w-full bg-[#f5f0eb] pt-28 pb-16 overflow-hidden">
+    <section id="home" className="relative min-h-screen w-full bg-white pt-36 pb-16 overflow-hidden">
       {/* Main content container */}
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Gallery container */}
-        <div className="flex items-center justify-center gap-4 md:gap-6 h-[70vh] max-h-[600px]">
+        <div className="flex items-center justify-center gap-3 md:gap-5 h-[65vh] max-h-[550px]">
           {visibleIndices.map((slideIndex, position) => {
             const slide = slides[slideIndex];
             const isActive = position === 1;
@@ -60,18 +60,22 @@ const HeroCarousel = () => {
               <div
                 key={slideIndex}
                 onClick={() => setActiveIndex(slideIndex)}
-                className={`relative overflow-hidden rounded-lg cursor-pointer transition-all duration-700 ease-out ${
-                  isActive 
-                    ? "flex-[2] h-full" 
-                    : "flex-[0.5] h-[85%] grayscale hover:grayscale-0"
-                }`}
+                className={`relative overflow-hidden rounded-xl cursor-pointer
+                  transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]
+                  ${isActive 
+                    ? "flex-[2.5] h-full shadow-2xl" 
+                    : "flex-[0.6] h-[80%] grayscale-[70%] hover:grayscale-[30%] opacity-80 hover:opacity-100"
+                  }`}
+                style={{
+                  transitionProperty: 'flex, height, filter, opacity, box-shadow',
+                }}
               >
                 {/* Image */}
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className={`w-full h-full object-cover transition-all duration-700 ${
-                    isActive ? "scale-100" : "scale-110"
+                  className={`w-full h-full object-cover transition-transform duration-1000 ease-out ${
+                    isActive ? "scale-100" : "scale-105 hover:scale-100"
                   }`}
                 />
                 
