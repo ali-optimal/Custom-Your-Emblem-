@@ -40,7 +40,7 @@ const Header = () => {
       <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out border-b border-white/10
           ${scrolled 
-            ? "bg-black/98 shadow-lg backdrop-blur-md py-3" 
+            ? "bg-black shadow-lg py-3" 
             : "bg-black py-5"
           }`}
       >
