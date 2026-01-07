@@ -76,7 +76,8 @@ const Header = () => {
                   className="group relative px-4 py-2"
                 >
                   <span 
-                    className={`relative z-10 font-body text-base tracking-[0.1em] uppercase font-semibold transition-all duration-300
+                    className={`relative z-10 font-body tracking-[0.1em] uppercase font-semibold transition-all duration-300
+                      ${scrolled ? "text-sm" : "text-base"}
                       ${activeLink === link.href 
                         ? "text-primary" 
                         : "text-white group-hover:text-primary"
