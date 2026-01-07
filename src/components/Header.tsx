@@ -38,10 +38,10 @@ const Header = () => {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out border-b border-white/10
           ${scrolled 
-            ? "bg-white/98 shadow-lg backdrop-blur-md py-3" 
-            : "bg-white py-5"
+            ? "bg-black/98 shadow-lg backdrop-blur-md py-3" 
+            : "bg-black py-5"
           }`}
       >
         <div className="container mx-auto px-6">
@@ -49,16 +49,16 @@ const Header = () => {
             {/* Logo Section - Left */}
             <div className="flex flex-col">
               <h1 
-                className={`font-display font-semibold tracking-[0.15em] uppercase text-gradient-luxury transition-all duration-500
+                className={`font-display font-semibold tracking-[0.15em] uppercase text-white transition-all duration-500
                   ${scrolled ? "text-lg md:text-xl" : "text-xl md:text-2xl"}`}
               >
                 Your Custom Emblem
               </h1>
               
               <div className="flex items-center gap-2 mt-1">
-                <span className="w-6 h-[1px] bg-gradient-to-r from-primary/40 to-transparent" />
+                <span className="w-6 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
                 <span 
-                  className={`font-body text-muted-foreground tracking-[0.2em] uppercase transition-all duration-500
+                  className={`font-body text-white/60 tracking-[0.2em] uppercase transition-all duration-500
                     ${scrolled ? "text-[9px]" : "text-[10px] md:text-xs"}`}
                 >
                   Specially designed for you
@@ -79,7 +79,7 @@ const Header = () => {
                     className={`relative z-10 font-body text-sm tracking-[0.1em] uppercase transition-all duration-300
                       ${activeLink === link.href 
                         ? "text-primary font-medium" 
-                        : "text-muted-foreground group-hover:text-primary"
+                        : "text-white/70 group-hover:text-primary"
                       }`}
                   >
                     {link.name}
@@ -96,7 +96,7 @@ const Header = () => {
                   
                   {/* Subtle hover glow */}
                   <span 
-                    className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 rounded-lg bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />
                 </a>
               ))}
@@ -104,11 +104,11 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden relative p-3 text-muted-foreground hover:text-primary transition-colors duration-300 group z-50"
+              className="lg:hidden relative p-3 text-white/70 hover:text-primary transition-colors duration-300 group z-50"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              <span className="absolute inset-0 rounded-full bg-primary/5 scale-0 group-hover:scale-100 transition-transform duration-300" />
+              <span className="absolute inset-0 rounded-full bg-white/5 scale-0 group-hover:scale-100 transition-transform duration-300" />
               <span className="relative z-10">
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </span>

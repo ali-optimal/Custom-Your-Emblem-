@@ -70,9 +70,9 @@ const HeroCarousel = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen w-full pt-32 pb-16 overflow-hidden bg-white">
-      {/* Clean white background with subtle accent */}
-      <div className="absolute inset-0 bg-white" />
+    <section id="home" className="relative min-h-screen w-full pt-32 pb-16 overflow-hidden bg-black border-b border-white/10">
+      {/* Dark background */}
+      <div className="absolute inset-0 bg-black" />
 
       <div className="relative z-10 w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2">
         {/* Desktop Gallery - All 4 images visible */}
@@ -243,10 +243,10 @@ const HeroCarousel = () => {
             <button
               key={index}
               onClick={() => handleClick(index)}
-              className="relative h-2 rounded-full overflow-hidden transition-all duration-400"
+              className="relative h-2 rounded-full overflow-hidden transition-all duration-400 border border-white/20"
               style={{
                 width: index === activeIndex ? "40px" : "12px",
-                backgroundColor: index === activeIndex ? "hsl(var(--primary))" : "hsl(var(--muted))",
+                backgroundColor: index === activeIndex ? "hsl(var(--primary))" : "rgba(255, 255, 255, 0.2)",
               }}
               aria-label={`Go to slide ${index + 1}`}
             />
