@@ -23,35 +23,65 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-32 overflow-hidden">
       {/* White background base */}
       <div className="absolute inset-0 bg-white" />
       
-      {/* Violet diagonal shape */}
+      {/* Main violet angled shape - sharp diagonal */}
       <div 
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #4338ca 0%, #3730a3 50%, #312e81 100%)",
-          clipPath: "polygon(0 8%, 100% 0%, 100% 92%, 0% 100%)",
+          background: "linear-gradient(135deg, #4f46e5 0%, #4338ca 40%, #3730a3 100%)",
+          clipPath: "polygon(0 15%, 100% 0%, 100% 85%, 0% 100%)",
         }}
-      >
-        {/* Subtle pattern overlay */}
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: "24px 24px",
-          }}
-        />
-        
-        {/* Glowing accents */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-400/20 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-400/15 rounded-full blur-[100px]" />
-      </div>
+      />
+      
+      {/* Secondary angled accent - top right */}
+      <div 
+        className="absolute top-0 right-0 w-1/3 h-1/2"
+        style={{
+          background: "linear-gradient(180deg, #6366f1 0%, transparent 100%)",
+          clipPath: "polygon(40% 0%, 100% 0%, 100% 60%, 0% 100%)",
+          opacity: 0.3,
+        }}
+      />
+      
+      {/* Third angled accent - bottom left */}
+      <div 
+        className="absolute bottom-0 left-0 w-1/2 h-1/3"
+        style={{
+          background: "linear-gradient(0deg, #312e81 0%, transparent 100%)",
+          clipPath: "polygon(0% 40%, 100% 0%, 100% 100%, 0% 100%)",
+          opacity: 0.4,
+        }}
+      />
+      
+      {/* Geometric lines */}
+      <div 
+        className="absolute top-[10%] left-0 right-0 h-[1px] bg-white/10"
+        style={{ transform: "rotate(-3deg)" }}
+      />
+      <div 
+        className="absolute bottom-[10%] left-0 right-0 h-[1px] bg-white/10"
+        style={{ transform: "rotate(3deg)" }}
+      />
+      
+      {/* Subtle pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+          backgroundSize: "32px 32px",
+        }}
+      />
+      
+      {/* Glowing accents */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-400/20 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-400/15 rounded-full blur-[100px]" />
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16 pt-8">
+        <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-4">
             <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-white/50" />
             <span className="font-body text-xs tracking-[0.3em] uppercase text-indigo-200">
