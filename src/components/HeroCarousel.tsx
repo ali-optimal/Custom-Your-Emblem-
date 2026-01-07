@@ -185,7 +185,7 @@ const HeroCarousel = () => {
                 >
                   <div className="flex items-end justify-between">
                     <div>
-                      <p className="font-body text-xs md:text-sm text-primary tracking-widest uppercase mb-1.5">
+                      <p className="font-body text-xs md:text-sm text-white/60 tracking-widest uppercase mb-1.5">
                         {slide.subtitle}
                       </p>
                       <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-semibold text-white leading-tight">
@@ -243,7 +243,7 @@ const HeroCarousel = () => {
                     transition: "all 0.5s ease-out 0.2s",
                   }}
                 >
-                  <p className="font-body text-xs text-primary tracking-widest uppercase mb-1">
+                  <p className="font-body text-xs text-white/60 tracking-widest uppercase mb-1">
                     {slide.subtitle}
                   </p>
                   <h2 className="font-display text-xl font-semibold text-white leading-tight">
