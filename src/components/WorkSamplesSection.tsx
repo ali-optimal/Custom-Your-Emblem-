@@ -31,22 +31,20 @@ const WorkSamplesSection = () => {
 
   return (
     <>
-      <section className="relative py-24 bg-white overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-blue-50 to-transparent rounded-full blur-3xl opacity-60" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-slate-100 to-transparent rounded-full blur-3xl opacity-60" />
+      <section className="relative py-24 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-20 left-10 w-32 h-32 border border-slate-200 rounded-full opacity-40" />
+        <div className="absolute top-40 left-20 w-16 h-16 border border-slate-200 rounded-full opacity-30" />
+        <div className="absolute bottom-20 right-10 w-40 h-40 border border-slate-200 rounded-full opacity-40" />
+        <div className="absolute bottom-40 right-32 w-20 h-20 border border-slate-200 rounded-full opacity-30" />
         
-        {/* Subtle pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
+        {/* Elegant line decorations */}
+        <div className="absolute top-1/3 left-0 w-32 h-[1px] bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+        <div className="absolute top-2/3 right-0 w-32 h-[1px] bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
 
         <div className="relative z-10 container mx-auto px-6">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -71,8 +69,8 @@ const WorkSamplesSection = () => {
             </motion.div>
           </div>
 
-          {/* Samples Grid */}
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto">
+          {/* Samples Grid - Elegant card style */}
+          <div className="grid md:grid-cols-3 gap-10 lg:gap-14 max-w-6xl mx-auto">
             {samples.map((sample, index) => (
               <motion.div
                 key={sample.id}
@@ -83,76 +81,74 @@ const WorkSamplesSection = () => {
                 className="group cursor-pointer"
                 onClick={() => setSelectedImage(sample)}
               >
-                {/* Custom diamond/rhombus shape container */}
-                <div className="relative mx-auto w-56 h-56 md:w-64 md:h-64">
-                  {/* Outer glow ring */}
-                  <div 
-                    className="absolute inset-0 transition-all duration-500 group-hover:scale-110"
-                    style={{
-                      background: "linear-gradient(135deg, #006de4 0%, #0052ab 100%)",
-                      clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                      opacity: 0.1,
-                    }}
-                  />
+                {/* Elegant frame container */}
+                <div className="relative">
+                  {/* Outer decorative frame */}
+                  <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-slate-100 via-white to-slate-100 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  {/* Border frame */}
-                  <div 
-                    className="absolute inset-2 transition-all duration-500"
-                    style={{
-                      background: "linear-gradient(135deg, #006de4 0%, #0052ab 50%, #006de4 100%)",
-                      clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                    }}
-                  />
-                  
-                  {/* Image container */}
-                  <div 
-                    className="absolute inset-4 overflow-hidden transition-all duration-500 group-hover:inset-3"
-                    style={{
-                      clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                    }}
-                  >
-                    <img 
-                      src={sample.image} 
-                      alt={sample.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  {/* Main image container with arch top */}
+                  <div className="relative overflow-hidden rounded-t-[6rem] rounded-b-2xl bg-white shadow-xl group-hover:shadow-2xl transition-shadow duration-500">
+                    {/* Blue accent bar at top */}
+                    <div 
+                      className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-b-full z-20"
+                      style={{ background: "#006de4" }}
                     />
                     
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-8">
-                      <ZoomIn className="w-8 h-8 text-white drop-shadow-lg" />
+                    {/* Image */}
+                    <div className="relative aspect-[3/4] overflow-hidden">
+                      <img 
+                        src={sample.image} 
+                        alt={sample.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      {/* Zoom icon */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                          <ZoomIn className="w-6 h-6" style={{ color: "#006de4" }} />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom content area */}
+                    <div className="relative p-6 bg-white">
+                      {/* Decorative corner elements */}
+                      <div className="absolute top-0 left-4 w-8 h-[2px] bg-gradient-to-r from-slate-200 to-transparent" />
+                      <div className="absolute top-0 right-4 w-8 h-[2px] bg-gradient-to-l from-slate-200 to-transparent" />
+                      
+                      <h3 className="font-display text-xl font-semibold text-slate-800 text-center group-hover:text-[#006de4] transition-colors duration-300">
+                        {sample.title}
+                      </h3>
+                      <p className="font-body text-sm text-slate-400 text-center mt-2">
+                        {sample.description}
+                      </p>
+                      
+                      {/* Bottom accent */}
+                      <div className="flex justify-center mt-4">
+                        <div className="w-12 h-[2px] rounded-full bg-gradient-to-r from-transparent via-slate-200 to-transparent group-hover:via-[#006de4] transition-colors duration-500" />
+                      </div>
                     </div>
                   </div>
                   
-                  {/* Corner accents */}
-                  <div className="absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 border-l-2 border-t-2 rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ borderColor: "#006de4" }} />
-                  <div className="absolute top-1/2 -translate-y-1/2 -right-2 w-4 h-4 border-r-2 border-b-2 rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ borderColor: "#006de4" }} />
-                </div>
-
-                {/* Title and description */}
-                <div className="text-center mt-6">
-                  <h3 className="font-display text-xl font-semibold text-slate-800 group-hover:text-[#006de4] transition-colors duration-300">
-                    {sample.title}
-                  </h3>
-                  <p className="font-body text-sm text-slate-400 mt-1">
-                    {sample.description}
-                  </p>
+                  {/* Side decorative elements */}
+                  <div className="absolute top-1/2 -left-2 w-1 h-12 rounded-full bg-gradient-to-b from-transparent via-slate-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-1/2 -right-2 w-1 h-12 rounded-full bg-gradient-to-b from-transparent via-slate-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               </motion.div>
             ))}
           </div>
 
           {/* Decorative bottom element */}
-          <div className="flex justify-center mt-16">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-slate-300" />
-              <div 
-                className="w-3 h-3"
-                style={{
-                  background: "linear-gradient(135deg, #006de4, #0052ab)",
-                  clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                }}
-              />
-              <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-slate-300" />
+          <div className="flex justify-center mt-20">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-slate-300" />
+              <div className="w-2 h-2 rounded-full" style={{ background: "#006de4" }} />
+              <div className="w-3 h-3 rounded-full border-2" style={{ borderColor: "#006de4" }} />
+              <div className="w-2 h-2 rounded-full" style={{ background: "#006de4" }} />
+              <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-slate-300" />
             </div>
           </div>
         </div>
@@ -185,32 +181,29 @@ const WorkSamplesSection = () => {
               className="relative max-w-4xl w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Diamond frame for modal */}
-              <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-1 shadow-2xl">
-                <div className="bg-slate-900 rounded-xl p-4">
-                  <img 
-                    src={selectedImage.image} 
-                    alt={selectedImage.title}
-                    className="w-full h-auto max-h-[70vh] object-contain rounded-lg"
-                  />
-                  
-                  {/* Info bar */}
-                  <div className="mt-4 text-center">
-                    <h3 className="font-display text-2xl font-semibold text-white">
-                      {selectedImage.title}
-                    </h3>
-                    <p className="font-body text-slate-400 mt-1">
-                      {selectedImage.description}
-                    </p>
-                  </div>
+              <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl">
+                <img 
+                  src={selectedImage.image} 
+                  alt={selectedImage.title}
+                  className="w-full h-auto max-h-[70vh] object-contain"
+                />
+                
+                {/* Info bar */}
+                <div className="p-6 text-center bg-white">
+                  <h3 className="font-display text-2xl font-semibold text-slate-800">
+                    {selectedImage.title}
+                  </h3>
+                  <p className="font-body text-slate-500 mt-1">
+                    {selectedImage.description}
+                  </p>
                 </div>
               </div>
               
-              {/* Decorative corners */}
-              <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 rounded-tl-lg" style={{ borderColor: "#006de4" }} />
-              <div className="absolute -top-3 -right-3 w-8 h-8 border-r-2 border-t-2 rounded-tr-lg" style={{ borderColor: "#006de4" }} />
-              <div className="absolute -bottom-3 -left-3 w-8 h-8 border-l-2 border-b-2 rounded-bl-lg" style={{ borderColor: "#006de4" }} />
-              <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 rounded-br-lg" style={{ borderColor: "#006de4" }} />
+              {/* Decorative frame */}
+              <div className="absolute -top-2 -left-2 w-12 h-12 border-l-2 border-t-2 rounded-tl-xl" style={{ borderColor: "#006de4" }} />
+              <div className="absolute -top-2 -right-2 w-12 h-12 border-r-2 border-t-2 rounded-tr-xl" style={{ borderColor: "#006de4" }} />
+              <div className="absolute -bottom-2 -left-2 w-12 h-12 border-l-2 border-b-2 rounded-bl-xl" style={{ borderColor: "#006de4" }} />
+              <div className="absolute -bottom-2 -right-2 w-12 h-12 border-r-2 border-b-2 rounded-br-xl" style={{ borderColor: "#006de4" }} />
             </motion.div>
           </motion.div>
         )}
