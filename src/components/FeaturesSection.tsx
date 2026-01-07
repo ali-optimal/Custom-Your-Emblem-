@@ -112,7 +112,7 @@ const FeaturesSection = () => {
         className="absolute top-0 left-0 w-full h-16 md:h-24 z-10"
         viewBox="0 0 1440 100" 
         preserveAspectRatio="none"
-        fill="white"
+        fill="black"
       >
         <polygon points="0,0 1440,0 1440,0 0,100" />
       </svg>
