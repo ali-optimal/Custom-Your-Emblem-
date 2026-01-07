@@ -51,7 +51,7 @@ const FeatureCard = ({ feature, index, allCardsControls }: {
   return (
     <motion.div
       ref={cardRef}
-      className="group relative bg-white rounded-2xl p-8 shadow-xl"
+      className="relative bg-white rounded-2xl p-8 shadow-xl"
       initial={{ 
         opacity: 0, 
         rotateY: -90,
@@ -59,32 +59,22 @@ const FeatureCard = ({ feature, index, allCardsControls }: {
         z: -200,
       }}
       animate={controls}
-      whileHover={{
-        rotateY: 8,
-        rotateX: -8,
-        z: 50,
-        scale: 1.05,
-        transition: { duration: 0.3 }
-      }}
       style={{ transformStyle: "preserve-3d" }}
     >
-      {/* Card glow on hover */}
-      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg -z-10" />
-      
       {/* Icon */}
       <div className="relative mb-6">
-        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-indigo-500/30">
+        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center shadow-lg shadow-sky-500/30">
           <feature.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
         </div>
         
         {/* Number badge */}
-        <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-indigo-100 flex items-center justify-center font-display text-sm text-indigo-600 shadow-md">
+        <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-sky-100 flex items-center justify-center font-display text-sm text-sky-600 shadow-md">
           {index + 1}
         </span>
       </div>
 
       {/* Title */}
-      <h3 className="font-display text-xl font-semibold text-slate-800 mb-4 group-hover:text-indigo-600 transition-colors duration-300">
+      <h3 className="font-display text-xl font-semibold text-slate-800 mb-4">
         {feature.title}
       </h3>
 
@@ -92,9 +82,6 @@ const FeatureCard = ({ feature, index, allCardsControls }: {
       <p className="font-body text-sm text-slate-500 leading-relaxed">
         {feature.description}
       </p>
-
-      {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </motion.div>
   );
 };
@@ -120,41 +107,41 @@ const FeaturesSection = () => {
 
   return (
     <section ref={sectionRef} className="relative py-32 overflow-hidden">
-      {/* SVG angled top */}
+      {/* SVG angled top - steeper angle */}
       <svg 
-        className="absolute top-0 left-0 w-full h-24 md:h-32"
-        viewBox="0 0 1440 120" 
+        className="absolute top-0 left-0 w-full h-32 md:h-48 z-10"
+        viewBox="0 0 1440 150" 
         preserveAspectRatio="none"
         fill="white"
       >
-        <polygon points="0,0 1440,0 1440,40 0,120" />
+        <polygon points="0,0 1440,0 1440,0 0,150" />
       </svg>
 
-      {/* Main violet background */}
+      {/* Main background */}
       <div 
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #4f46e5 0%, #4338ca 40%, #3730a3 100%)",
+          background: "#66a7ee",
         }}
       />
       
       {/* SVG angled bottom */}
       <svg 
-        className="absolute bottom-0 left-0 w-full h-24 md:h-32"
-        viewBox="0 0 1440 120" 
+        className="absolute bottom-0 left-0 w-full h-32 md:h-48 z-10"
+        viewBox="0 0 1440 150" 
         preserveAspectRatio="none"
         fill="white"
       >
-        <polygon points="0,80 1440,0 1440,120 0,120" />
+        <polygon points="0,150 1440,0 1440,150 0,150" />
       </svg>
       
       {/* Secondary angled accent - top right */}
       <div 
         className="absolute top-20 right-0 w-1/3 h-1/2"
         style={{
-          background: "linear-gradient(180deg, #6366f1 0%, transparent 100%)",
+          background: "linear-gradient(180deg, #7db8f5 0%, transparent 100%)",
           clipPath: "polygon(40% 0%, 100% 0%, 100% 60%, 0% 100%)",
-          opacity: 0.3,
+          opacity: 0.4,
         }}
       />
       
@@ -162,7 +149,7 @@ const FeaturesSection = () => {
       <div 
         className="absolute bottom-20 left-0 w-1/2 h-1/3"
         style={{
-          background: "linear-gradient(0deg, #312e81 0%, transparent 100%)",
+          background: "linear-gradient(0deg, #4a8fd9 0%, transparent 100%)",
           clipPath: "polygon(0% 40%, 100% 0%, 100% 100%, 0% 100%)",
           opacity: 0.4,
         }}
@@ -188,8 +175,8 @@ const FeaturesSection = () => {
       />
       
       {/* Glowing accents */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-400/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-400/15 rounded-full blur-[100px]" />
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sky-300/20 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-sky-200/15 rounded-full blur-[100px]" />
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Section Header */}
@@ -201,7 +188,7 @@ const FeaturesSection = () => {
         >
           <div className="inline-flex items-center gap-3 mb-4">
             <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-white/50" />
-            <span className="font-body text-xs tracking-[0.3em] uppercase text-indigo-200">
+            <span className="font-body text-xs tracking-[0.3em] uppercase text-sky-100">
               Why Choose Us
             </span>
             <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-white/50" />
@@ -211,7 +198,7 @@ const FeaturesSection = () => {
             Custom Made Design
           </h2>
           
-          <p className="max-w-3xl mx-auto font-body text-indigo-100/80 leading-relaxed text-base md:text-lg">
+          <p className="max-w-3xl mx-auto font-body text-sky-50/90 leading-relaxed text-base md:text-lg">
             Ready to offer personalized emblems to your friends and family or perhaps a treat for you as well to be installed on your car, bike... or anywhere you feel like?
           </p>
         </motion.div>
