@@ -1,4 +1,6 @@
 import { Palette, BadgeCheck, Truck } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
 const features = [
   {
@@ -22,23 +24,49 @@ const features = [
 ];
 
 const FeaturesSection = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [allCardsLoaded, setAllCardsLoaded] = useState(false);
+  const [showSecondAnimation, setShowSecondAnimation] = useState(false);
+
+  useEffect(() => {
+    if (isInView) {
+      // After all cards have animated in (stagger * 3 + duration)
+      const timer = setTimeout(() => {
+        setAllCardsLoaded(true);
+        setTimeout(() => setShowSecondAnimation(true), 100);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView]);
+
   return (
-    <section className="relative py-32 overflow-hidden">
-      {/* White background base */}
-      <div className="absolute inset-0 bg-white" />
-      
-      {/* Main violet angled shape - sharp diagonal */}
+    <section ref={sectionRef} className="relative py-32 overflow-hidden">
+      {/* Seamless gradient from white to violet */}
       <div 
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #4f46e5 0%, #4338ca 40%, #3730a3 100%)",
-          clipPath: "polygon(0 15%, 100% 0%, 100% 85%, 0% 100%)",
+          background: "linear-gradient(180deg, white 0%, #4f46e5 8%, #4338ca 50%, #3730a3 92%, white 100%)",
+        }}
+      />
+      
+      {/* Angled accent shapes */}
+      <div 
+        className="absolute top-0 left-0 w-full h-32"
+        style={{
+          background: "linear-gradient(165deg, white 45%, transparent 45.5%)",
+        }}
+      />
+      <div 
+        className="absolute top-0 right-0 w-2/3 h-40"
+        style={{
+          background: "linear-gradient(195deg, white 35%, transparent 35.5%)",
         }}
       />
       
       {/* Secondary angled accent - top right */}
       <div 
-        className="absolute top-0 right-0 w-1/3 h-1/2"
+        className="absolute top-20 right-0 w-1/3 h-1/2"
         style={{
           background: "linear-gradient(180deg, #6366f1 0%, transparent 100%)",
           clipPath: "polygon(40% 0%, 100% 0%, 100% 60%, 0% 100%)",
@@ -48,7 +76,7 @@ const FeaturesSection = () => {
       
       {/* Third angled accent - bottom left */}
       <div 
-        className="absolute bottom-0 left-0 w-1/2 h-1/3"
+        className="absolute bottom-20 left-0 w-1/2 h-1/3"
         style={{
           background: "linear-gradient(0deg, #312e81 0%, transparent 100%)",
           clipPath: "polygon(0% 40%, 100% 0%, 100% 100%, 0% 100%)",
@@ -56,13 +84,27 @@ const FeaturesSection = () => {
         }}
       />
       
+      {/* Bottom angled shapes */}
+      <div 
+        className="absolute bottom-0 left-0 w-full h-32"
+        style={{
+          background: "linear-gradient(345deg, white 45%, transparent 45.5%)",
+        }}
+      />
+      <div 
+        className="absolute bottom-0 left-0 w-2/3 h-40"
+        style={{
+          background: "linear-gradient(15deg, white 35%, transparent 35.5%)",
+        }}
+      />
+      
       {/* Geometric lines */}
       <div 
-        className="absolute top-[10%] left-0 right-0 h-[1px] bg-white/10"
+        className="absolute top-[15%] left-0 right-0 h-[1px] bg-white/10"
         style={{ transform: "rotate(-3deg)" }}
       />
       <div 
-        className="absolute bottom-[10%] left-0 right-0 h-[1px] bg-white/10"
+        className="absolute bottom-[15%] left-0 right-0 h-[1px] bg-white/10"
         style={{ transform: "rotate(3deg)" }}
       />
       
@@ -81,7 +123,12 @@ const FeaturesSection = () => {
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
           <div className="inline-flex items-center gap-3 mb-4">
             <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-white/50" />
             <span className="font-body text-xs tracking-[0.3em] uppercase text-indigo-200">
@@ -97,14 +144,58 @@ const FeaturesSection = () => {
           <p className="max-w-3xl mx-auto font-body text-indigo-100/80 leading-relaxed text-base md:text-lg">
             Ready to offer personalized emblems to your friends and family or perhaps a treat for you as well to be installed on your car, bike... or anywhere you feel like?
           </p>
-        </div>
+        </motion.div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8" style={{ perspective: "1000px" }}>
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={feature.title}
-              className="group relative bg-white rounded-2xl p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+              className="group relative bg-white rounded-2xl p-8 shadow-xl"
+              initial={{ 
+                opacity: 0, 
+                rotateY: -90,
+                rotateX: 15,
+                z: -200,
+              }}
+              animate={
+                showSecondAnimation
+                  ? {
+                      opacity: 1,
+                      rotateY: [0, 15, 0],
+                      rotateX: [0, -5, 0],
+                      z: [0, 50, 0],
+                      scale: [1, 1.05, 1],
+                    }
+                  : isInView
+                  ? { 
+                      opacity: 1, 
+                      rotateY: 0,
+                      rotateX: 0,
+                      z: 0,
+                    }
+                  : {}
+              }
+              transition={
+                showSecondAnimation
+                  ? {
+                      duration: 0.8,
+                      ease: "easeInOut",
+                    }
+                  : {
+                      duration: 0.8,
+                      delay: index * 0.3,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }
+              }
+              whileHover={{
+                rotateY: 5,
+                rotateX: -5,
+                z: 30,
+                scale: 1.02,
+                transition: { duration: 0.3 }
+              }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               {/* Card glow on hover */}
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg -z-10" />
@@ -133,7 +224,7 @@ const FeaturesSection = () => {
 
               {/* Bottom accent line */}
               <div className="absolute bottom-0 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
+            </motion.div>
           ))}
         </div>
 
