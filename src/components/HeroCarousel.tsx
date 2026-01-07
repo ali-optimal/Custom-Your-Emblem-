@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import heroEmblem1 from "@/assets/hero-emblem-1.jpg";
 import heroEmblem2 from "@/assets/hero-emblem-2.jpg";
 import heroEmblem3 from "@/assets/hero-emblem-3.jpg";
+import heroEmblem4 from "@/assets/hero-emblem-4.jpg";
 
 const slides = [
   {
@@ -22,112 +23,204 @@ const slides = [
     subtitle: "24K Gold Finishes",
     year: "2024",
   },
+  {
+    image: heroEmblem4,
+    title: "Modern Elegance",
+    subtitle: "Chrome & Blue Metallic",
+    year: "2024",
+  },
 ];
 
 const HeroCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const transitionRef = useRef<NodeJS.Timeout | null>(null);
 
   const nextSlide = useCallback(() => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setActiveIndex((prev) => (prev + 1) % slides.length);
-  }, []);
+    
+    // Reset transition lock after animation completes
+    transitionRef.current = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 800);
+  }, [isTransitioning]);
 
-  // Auto-scroll every 4 seconds
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 4000);
-    return () => clearInterval(interval);
-  }, [nextSlide]);
-
-  // Get indices for the 3 visible slides
-  const getVisibleIndices = () => {
-    const prev = (activeIndex - 1 + slides.length) % slides.length;
-    const next = (activeIndex + 1) % slides.length;
-    return [prev, activeIndex, next];
+  const goToSlide = (index: number) => {
+    if (isTransitioning || index === activeIndex) return;
+    setIsTransitioning(true);
+    setActiveIndex(index);
+    
+    transitionRef.current = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 800);
   };
 
-  const visibleIndices = getVisibleIndices();
+  // Auto-scroll every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 5000);
+    return () => {
+      clearInterval(interval);
+      if (transitionRef.current) clearTimeout(transitionRef.current);
+    };
+  }, [nextSlide]);
+
+  // Calculate positions for all 4 slides with smooth circular layout
+  const getSlideStyles = (index: number) => {
+    const diff = (index - activeIndex + slides.length) % slides.length;
+    
+    // Position mapping: 0 = center, 1 = right, 2 = far right (hidden), 3 = left
+    if (diff === 0) {
+      // Active center slide
+      return {
+        transform: "translateX(0%) scale(1)",
+        opacity: 1,
+        zIndex: 30,
+        flex: "2.2",
+        filter: "grayscale(0%)",
+      };
+    } else if (diff === 1) {
+      // Right side
+      return {
+        transform: "translateX(5%) scale(0.92)",
+        opacity: 0.85,
+        zIndex: 20,
+        flex: "0.7",
+        filter: "grayscale(50%)",
+      };
+    } else if (diff === slides.length - 1) {
+      // Left side
+      return {
+        transform: "translateX(-5%) scale(0.92)",
+        opacity: 0.85,
+        zIndex: 20,
+        flex: "0.7",
+        filter: "grayscale(50%)",
+      };
+    } else {
+      // Hidden (far sides)
+      return {
+        transform: "translateX(0%) scale(0.85)",
+        opacity: 0,
+        zIndex: 10,
+        flex: "0",
+        filter: "grayscale(80%)",
+      };
+    }
+  };
 
   return (
     <section id="home" className="relative min-h-screen w-full bg-white pt-36 pb-16 overflow-hidden">
       {/* Main content container */}
       <div className="container mx-auto px-4 md:px-6">
         {/* Gallery container */}
-        <div className="flex items-center justify-center gap-3 md:gap-5 h-[65vh] max-h-[550px]">
-          {visibleIndices.map((slideIndex, position) => {
-            const slide = slides[slideIndex];
-            const isActive = position === 1;
+        <div className="flex items-center justify-center gap-4 md:gap-6 h-[65vh] max-h-[550px]">
+          {slides.map((slide, index) => {
+            const styles = getSlideStyles(index);
+            const isActive = index === activeIndex;
             
             return (
               <div
-                key={slideIndex}
-                onClick={() => setActiveIndex(slideIndex)}
-                className={`relative overflow-hidden rounded-xl cursor-pointer
-                  transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]
-                  ${isActive 
-                    ? "flex-[2.5] h-full shadow-2xl" 
-                    : "flex-[0.6] h-[80%] grayscale-[70%] hover:grayscale-[30%] opacity-80 hover:opacity-100"
-                  }`}
+                key={index}
+                onClick={() => goToSlide(index)}
+                className="relative overflow-hidden rounded-2xl cursor-pointer will-change-transform"
                 style={{
-                  transitionProperty: 'flex, height, filter, opacity, box-shadow',
+                  transform: styles.transform,
+                  opacity: styles.opacity,
+                  zIndex: styles.zIndex,
+                  flex: styles.flex,
+                  filter: styles.filter,
+                  height: isActive ? "100%" : "85%",
+                  transition: "all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                  boxShadow: isActive 
+                    ? "0 25px 60px -15px rgba(0, 0, 0, 0.35)" 
+                    : "0 10px 30px -10px rgba(0, 0, 0, 0.2)",
                 }}
               >
                 {/* Image */}
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className={`w-full h-full object-cover transition-transform duration-1000 ease-out ${
-                    isActive ? "scale-100" : "scale-105 hover:scale-100"
-                  }`}
+                  className="w-full h-full object-cover"
+                  style={{
+                    transform: isActive ? "scale(1)" : "scale(1.05)",
+                    transition: "transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                  }}
                 />
                 
                 {/* Overlay gradient for active slide */}
-                {isActive && (
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                )}
+                <div 
+                  className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"
+                  style={{
+                    opacity: isActive ? 1 : 0.3,
+                    transition: "opacity 0.6s ease-out",
+                  }}
+                />
                 
                 {/* Caption - only on active slide */}
-                {isActive && (
-                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                    <div className="flex items-end justify-between">
-                      <div className="transform transition-all duration-500 delay-200">
-                        <p className="font-body text-sm text-white/80 tracking-widest uppercase mb-2">
-                          {slide.subtitle}
-                        </p>
-                        <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
-                          {slide.title}
-                        </h2>
-                      </div>
-                      <span className="font-body text-sm text-white/60">
-                        {slide.year}
-                      </span>
+                <div 
+                  className="absolute bottom-0 left-0 right-0 p-6 md:p-8"
+                  style={{
+                    opacity: isActive ? 1 : 0,
+                    transform: isActive ? "translateY(0)" : "translateY(20px)",
+                    transition: "all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.2s",
+                  }}
+                >
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <p className="font-body text-sm text-white/80 tracking-widest uppercase mb-2">
+                        {slide.subtitle}
+                      </p>
+                      <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                        {slide.title}
+                      </h2>
                     </div>
+                    <span className="font-body text-sm text-white/60">
+                      {slide.year}
+                    </span>
                   </div>
-                )}
-                
-                {/* Subtle overlay for inactive slides */}
-                {!isActive && (
-                  <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors duration-300" />
-                )}
+                </div>
               </div>
             );
           })}
         </div>
         
         {/* Slide indicators */}
-        <div className="flex justify-center gap-3 mt-8">
+        <div className="flex justify-center gap-3 mt-10">
           {slides.map((_, index) => (
             <button
               key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                index === activeIndex
-                  ? "w-10 bg-primary"
-                  : "w-4 bg-gray-300 hover:bg-gray-400"
-              }`}
+              onClick={() => goToSlide(index)}
+              className="group relative h-2 rounded-full overflow-hidden transition-all duration-500"
+              style={{
+                width: index === activeIndex ? "48px" : "16px",
+                backgroundColor: index === activeIndex ? "transparent" : "hsl(var(--muted))",
+              }}
               aria-label={`Go to slide ${index + 1}`}
-            />
+            >
+              {index === activeIndex && (
+                <span 
+                  className="absolute inset-0 bg-primary rounded-full"
+                  style={{
+                    animation: "expandIndicator 5s linear forwards",
+                  }}
+                />
+              )}
+              <span 
+                className="absolute inset-0 bg-primary/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+            </button>
           ))}
         </div>
       </div>
+      
+      <style>{`
+        @keyframes expandIndicator {
+          from { transform: scaleX(0); transform-origin: left; }
+          to { transform: scaleX(1); transform-origin: left; }
+        }
+      `}</style>
     </section>
   );
 };
