@@ -27,67 +27,67 @@ const FeaturesSection = () => {
       {/* White background base */}
       <div className="absolute inset-0 bg-white" />
       
-      {/* Main violet hard angled shape */}
+      {/* Main violet angled shape - sharp diagonal */}
       <div 
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #4338ca 0%, #3730a3 50%, #312e81 100%)",
-          clipPath: "polygon(0 8%, 100% 0%, 100% 92%, 0% 100%)",
+          background: "linear-gradient(135deg, #4f46e5 0%, #4338ca 40%, #3730a3 100%)",
+          clipPath: "polygon(0 15%, 100% 0%, 100% 85%, 0% 100%)",
         }}
       />
       
-      {/* Hard edge accent - top */}
+      {/* Secondary angled accent - top right */}
       <div 
-        className="absolute top-0 left-0 right-0 h-[60%]"
+        className="absolute top-0 right-0 w-1/3 h-1/2"
         style={{
-          background: "linear-gradient(160deg, #4f46e5 0%, transparent 60%)",
-          clipPath: "polygon(0 0, 100% 0, 100% 25%, 0 45%)",
+          background: "linear-gradient(180deg, #6366f1 0%, transparent 100%)",
+          clipPath: "polygon(40% 0%, 100% 0%, 100% 60%, 0% 100%)",
+          opacity: 0.3,
         }}
       />
       
-      {/* Hard edge accent - right side */}
+      {/* Third angled accent - bottom left */}
       <div 
-        className="absolute top-0 right-0 w-[40%] h-full"
+        className="absolute bottom-0 left-0 w-1/2 h-1/3"
         style={{
-          background: "linear-gradient(200deg, #6366f1 0%, transparent 70%)",
-          clipPath: "polygon(50% 0, 100% 0, 100% 100%, 20% 100%)",
+          background: "linear-gradient(0deg, #312e81 0%, transparent 100%)",
+          clipPath: "polygon(0% 40%, 100% 0%, 100% 100%, 0% 100%)",
           opacity: 0.4,
         }}
       />
       
-      {/* Sharp bottom left accent */}
+      {/* Geometric lines */}
       <div 
-        className="absolute bottom-0 left-0 w-[60%] h-[50%]"
+        className="absolute top-[10%] left-0 right-0 h-[1px] bg-white/10"
+        style={{ transform: "rotate(-3deg)" }}
+      />
+      <div 
+        className="absolute bottom-[10%] left-0 right-0 h-[1px] bg-white/10"
+        style={{ transform: "rotate(3deg)" }}
+      />
+      
+      {/* Subtle pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-5"
         style={{
-          background: "linear-gradient(45deg, #1e1b4b 0%, transparent 60%)",
-          clipPath: "polygon(0 30%, 80% 0, 100% 100%, 0 100%)",
-          opacity: 0.5,
+          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+          backgroundSize: "32px 32px",
         }}
       />
       
-      {/* Geometric hard lines */}
-      <div 
-        className="absolute top-[8%] left-0 right-0 h-[2px] bg-white/20"
-        style={{ transform: "rotate(-2deg)" }}
-      />
-      <div 
-        className="absolute bottom-[8%] left-0 right-0 h-[2px] bg-white/20"
-        style={{ transform: "rotate(2deg)" }}
-      />
-      <div 
-        className="absolute top-[40%] left-0 right-0 h-[1px] bg-white/10"
-        style={{ transform: "rotate(-1deg)" }}
-      />
+      {/* Glowing accents */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-400/20 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-400/15 rounded-full blur-[100px]" />
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-4">
-            <span className="w-12 h-[2px] bg-gradient-to-r from-transparent to-white/60" />
+            <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-white/50" />
             <span className="font-body text-xs tracking-[0.3em] uppercase text-indigo-200">
               Why Choose Us
             </span>
-            <span className="w-12 h-[2px] bg-gradient-to-l from-transparent to-white/60" />
+            <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-white/50" />
           </div>
           
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-6">
@@ -99,75 +99,50 @@ const FeaturesSection = () => {
           </p>
         </div>
 
-        {/* Features Grid - 3D Cards */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-10" style={{ perspective: "1000px" }}>
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="group relative"
-              style={{ 
-                transformStyle: "preserve-3d",
-              }}
+              className="group relative bg-white rounded-2xl p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
             >
-              {/* 3D Card Shadow Layer */}
-              <div 
-                className="absolute inset-0 rounded-2xl bg-indigo-950/50 transition-all duration-500 group-hover:translate-y-4 group-hover:blur-xl"
-                style={{
-                  transform: "translateZ(-40px) translateY(20px)",
-                }}
-              />
+              {/* Card glow on hover */}
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg -z-10" />
               
-              {/* Main Card */}
-              <div
-                className="relative bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-800 rounded-2xl p-8 transition-all duration-500 group-hover:-translate-y-2 border border-indigo-400/20"
-                style={{
-                  transform: "translateZ(0)",
-                  boxShadow: "0 25px 50px -12px rgba(67, 56, 202, 0.4), 0 10px 20px -5px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                }}
-              >
-                {/* Card inner glow */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-60" />
-                
-                {/* Icon with 3D effect */}
-                <div className="relative mb-6">
-                  <div 
-                    className="w-14 h-14 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-white/20"
-                    style={{
-                      boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-                    }}
-                  >
-                    <feature.icon className="w-6 h-6 text-white" strokeWidth={1.5} />
-                  </div>
+              {/* Icon */}
+              <div className="relative mb-6">
+                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-indigo-500/30">
+                  <feature.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
                 </div>
-
-                {/* Title */}
-                <h3 className="font-display text-xl font-semibold text-white mb-3 relative z-10">
-                  {feature.title}
-                </h3>
-
-                {/* Description */}
-                <p className="font-body text-sm text-indigo-100/70 leading-relaxed relative z-10">
-                  {feature.description}
-                </p>
                 
-                {/* Card number indicator */}
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
-                  <span className="font-display text-sm text-white/80">{index + 1}</span>
-                </div>
-
-                {/* Bottom highlight */}
-                <div className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full" />
+                {/* Number badge */}
+                <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-indigo-100 flex items-center justify-center font-display text-sm text-indigo-600 shadow-md">
+                  {index + 1}
+                </span>
               </div>
+
+              {/* Title */}
+              <h3 className="font-display text-xl font-semibold text-slate-800 mb-4 group-hover:text-indigo-600 transition-colors duration-300">
+                {feature.title}
+              </h3>
+
+              {/* Description */}
+              <p className="font-body text-sm text-slate-500 leading-relaxed">
+                {feature.description}
+              </p>
+
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           ))}
         </div>
 
         {/* Bottom decorative element */}
         <div className="flex justify-center mt-16">
-          <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-white/30" />
-            <span className="w-4 h-4 rounded-full bg-white/80 shadow-lg shadow-white/20" />
-            <span className="w-2 h-2 rounded-full bg-white/30" />
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-white/40" />
+            <span className="w-3 h-3 rounded-full bg-white" />
+            <span className="w-2 h-2 rounded-full bg-white/40" />
           </div>
         </div>
       </div>
