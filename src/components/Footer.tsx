@@ -21,7 +21,7 @@ const Footer = () => {
       </svg>
 
       {/* Main footer content */}
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-4 sm:px-6 py-12">
         {/* Logo */}
         <div className="mb-10 text-center md:text-left">
           <img
@@ -146,7 +146,7 @@ const Footer = () => {
 
       {/* Bottom bar - Grey background */}
       <div className="bg-slate-800">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Copyright */}
             <p className="font-body text-sm text-slate-400">

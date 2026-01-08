@@ -7,7 +7,7 @@ const QuoteSection = () => {
       <div className="absolute left-8 top-1/2 -translate-y-1/2 text-[180px] font-display text-slate-100 leading-none select-none hidden md:block">"</div>
       <div className="absolute right-8 top-1/2 -translate-y-1/2 text-[180px] font-display text-slate-100 leading-none select-none rotate-180 hidden md:block">"</div>
 
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

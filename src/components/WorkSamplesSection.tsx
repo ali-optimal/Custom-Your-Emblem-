@@ -38,7 +38,7 @@ const WorkSamplesSection = () => {
         <div className="absolute bottom-20 right-10 w-40 h-40 border border-slate-200 rounded-full opacity-40" />
         <div className="absolute bottom-40 right-32 w-20 h-20 border border-slate-200 rounded-full opacity-30" />
 
-        <div className="relative z-10 container mx-auto px-6">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6">
           {/* Section Header */}
           <div className="text-center mb-12">
             <motion.div

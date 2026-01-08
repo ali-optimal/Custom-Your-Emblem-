@@ -10,7 +10,7 @@ const EmblemDetailsSection = () => {
       {/* Background decorations */}
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-gradient-to-tl from-blue-50 to-transparent rounded-full blur-3xl opacity-30" />
 
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch max-w-6xl mx-auto">
           {/* Image - Left side */}
           <motion.div

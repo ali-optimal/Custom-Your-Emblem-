@@ -74,7 +74,7 @@ const HeroCarousel = () => {
       {/* Dark background */}
       <div className="absolute inset-0 bg-black" />
 
-      <div className="relative z-10 w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2 mt-4">
+      <div className="relative z-10 w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2 mt-12">
         {/* Desktop Gallery - All 4 images visible */}
         <div className="hidden md:flex relative items-center justify-center gap-3 h-[75vh] max-h-[700px]">
           {slides.map((slide, index) => {

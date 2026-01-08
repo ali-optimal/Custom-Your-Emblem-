@@ -124,7 +124,7 @@ const OrderForm = () => {
 
   return (
     <section ref={formRef} className="bg-white py-20 min-h-screen">
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         
         {/* Step Indicator */}
         <div className="flex items-center justify-center mb-16">

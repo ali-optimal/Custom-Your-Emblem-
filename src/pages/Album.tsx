@@ -133,7 +133,7 @@ const Album = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/50" />
         </div>
 
-        <div className="container relative z-10 px-6 text-center">
+        <div className="container relative z-10 px-4 sm:px-6 text-center">
              <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}

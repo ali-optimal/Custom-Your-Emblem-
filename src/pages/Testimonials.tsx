@@ -250,7 +250,7 @@ const Testimonials = () => {
           />
           <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-white" />
 
-          <div className="relative container mx-auto px-6 py-10 md:py-14">
+          <div className="relative container mx-auto px-4 sm:px-6 py-10 md:py-14">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -280,7 +280,7 @@ const Testimonials = () => {
           </div>
         </section>
 
-        <section className="container mx-auto px-6 pb-24 md:pb-32">
+        <section className="container mx-auto px-4 sm:px-6 pb-24 md:pb-32">
           <div className="grid lg:grid-cols-3 gap-8 items-start">
             {/* Cards */}
             <div className="lg:col-span-2">
