@@ -182,23 +182,23 @@ const Header = () => {
 
       {/* Mobile Sidebar */}
       <div 
-        className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 transition-transform duration-500 ease-out rounded-l-[40px]
+        className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-black shadow-2xl z-50 transition-transform duration-500 ease-out rounded-l-[40px]
           ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Close button */}
         <button
-          className="absolute top-5 right-5 p-2 text-muted-foreground hover:text-primary transition-colors"
+          className="absolute top-5 right-5 p-2 text-white/70 hover:text-[#6898cc] transition-colors"
           onClick={() => setMobileMenuOpen(false)}
         >
           <X size={24} />
         </button>
 
         {/* Logo in sidebar */}
-        <div className="pt-16 px-6 pb-6 border-b border-primary/10">
+        <div className="pt-16 px-6 pb-6 border-b border-white/10">
           <img
             src={headerLogo}
             alt="Your Custom Emblem"
-            className="h-10 w-auto opacity-80"
+            className="h-10 w-auto opacity-100"
           />
         </div>
 
@@ -212,8 +212,8 @@ const Header = () => {
               },
               className: `block py-4 px-4 font-body text-sm tracking-[0.12em] uppercase rounded-xl transition-all duration-300 mb-1
                 ${activeLink === link.href 
-                  ? "text-primary font-medium bg-primary/5" 
-                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                  ? "text-[#6898cc] font-medium bg-white/5" 
+                  : "text-white/70 hover:text-[#6898cc] hover:bg-white/5"
                 }`,
               style: {
                 opacity: mobileMenuOpen ? 1 : 0,

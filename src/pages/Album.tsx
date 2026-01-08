@@ -189,7 +189,7 @@ const Album = () => {
       </section>
 
       {/* Grid Content */}
-      <main className="py-20 px-6 bg-slate-50 min-h-screen">
+      <main className="py-20 px-4 sm:px-6 bg-slate-50 min-h-screen">
         <div className="container mx-auto">
           <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
             {allImages.map((img, index) => (

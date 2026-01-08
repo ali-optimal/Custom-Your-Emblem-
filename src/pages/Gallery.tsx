@@ -105,7 +105,7 @@ const Gallery = () => {
       </section>
       
       {/* Albums Content Section */}
-      <main className="py-20 px-6 bg-slate-50">
+      <main className="py-20 px-4 sm:px-6 bg-slate-50">
         <div className="container mx-auto">
           {/* Albums Grid - 3 rows and 5 columns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">

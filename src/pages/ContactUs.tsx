@@ -96,16 +96,16 @@ const ContactUs = () => {
       </section>
 
       {/* Contact Section */}
-      <main className="py-20 px-6 bg-slate-50">
+      <main className="py-20 px-4 sm:px-6 bg-slate-50">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-12 sm:gap-12">
             {/* Left: Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
+              <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-slate-200">
                 <h2 className="font-display text-3xl font-bold text-slate-800 mb-6">
                   Send Us a Message
                 </h2>
@@ -190,7 +190,7 @@ const ContactUs = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-xl p-8 text-white h-full">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-xl p-6 sm:p-8 text-white h-full">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-3 bg-[#6898cc]/20 rounded-lg">
                     <Mail className="w-6 h-6 text-[#6898cc]" />
