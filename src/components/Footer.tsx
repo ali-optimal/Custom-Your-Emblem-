@@ -1,4 +1,5 @@
 import { Facebook, Instagram, CreditCard } from "lucide-react";
+import headerLogo from "@/assets/header logo.png";
 
 const Footer = () => {
   const testimonials = [
@@ -11,7 +12,7 @@ const Footer = () => {
     <footer className="relative bg-black">
       {/* Curvy top edge */}
       <svg 
-        className="absolute top-0 left-0 w-full h-16 -translate-y-full"
+        className="absolute top-0 left-0 w-full h-16 md:h-20 -translate-y-full z-10"
         viewBox="0 0 1440 80" 
         preserveAspectRatio="none"
         fill="black"
@@ -23,9 +24,11 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-12">
         {/* Logo */}
         <div className="mb-10 text-center md:text-left">
-          <h2 className="font-display text-2xl font-semibold tracking-[0.15em] uppercase text-gradient-luxury">
-            Your Custom Emblem
-          </h2>
+          <img
+            src={headerLogo}
+            alt="Your Custom Emblem"
+            className="h-12 w-auto mx-auto md:mx-0"
+          />
           <p className="font-body text-xs text-white/50 tracking-[0.2em] uppercase mt-1">
             Specially designed for you
           </p>
@@ -47,7 +50,8 @@ const Footer = () => {
             </div>
             <a 
               href="#" 
-              className="inline-block mt-4 font-body text-sm text-primary transition-colors hover:underline"
+              className="inline-block mt-4 font-body text-sm transition-colors hover:underline"
+              style={{ color: "rgb(104, 152, 204)" }}
             >
               Add my testimonial
             </a>
@@ -63,7 +67,8 @@ const Footer = () => {
                 - Make sure to send us your Emblem picture at{" "}
                 <a 
                   href="mailto:sales@yourcustomemblem.com" 
-                  className="text-primary transition-colors hover:underline"
+                  className="transition-colors hover:underline"
+                  style={{ color: "rgb(104, 152, 204)" }}
                 >
                   sales@yourcustomemblem.com
                 </a>{" "}
@@ -75,7 +80,8 @@ const Footer = () => {
                   href="https://instagram.com/yourcustomemblem" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary transition-colors hover:underline"
+                  className="transition-colors hover:underline"
+                  style={{ color: "rgb(104, 152, 204)" }}
                 >
                   @yourcustomemblem
                 </a>{" "}
@@ -113,20 +119,23 @@ const Footer = () => {
                 <span className="font-body text-sm text-white/60">Email:</span>
                 <a 
                   href="mailto:sales@yourcustomemblem.com"
-                  className="font-body text-sm text-primary transition-colors hover:underline"
+                  className="font-body text-sm transition-colors hover:underline"
+                  style={{ color: "rgb(104, 152, 204)" }}
                 >
                   sales@yourcustomemblem.com
                 </a>
               </div>
               <a 
                 href="#" 
-                className="block font-body text-sm text-primary transition-colors hover:underline"
+                className="block font-body text-sm transition-colors hover:underline"
+                style={{ color: "rgb(104, 152, 204)" }}
               >
                 Shipping and Order Tracking
               </a>
               <a 
                 href="#" 
-                className="block font-body text-sm text-primary transition-colors hover:underline"
+                className="block font-body text-sm transition-colors hover:underline"
+                style={{ color: "rgb(104, 152, 204)" }}
               >
                 General Terms and Conditions
               </a>
@@ -150,7 +159,10 @@ const Footer = () => {
                 href="https://facebook.com/yourcustomemblem" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-slate-700 hover:bg-primary flex items-center justify-center transition-colors group"
+                className="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center transition-colors group"
+                style={{ "--hover-bg": "rgb(104, 152, 204)" } as any}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgb(104, 152, 204)"}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ""}
               >
                 <Facebook className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
               </a>
@@ -158,7 +170,9 @@ const Footer = () => {
                 href="https://instagram.com/yourcustomemblem" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-slate-700 hover:bg-primary flex items-center justify-center transition-colors group"
+                className="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center transition-colors group"
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgb(104, 152, 204)"}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ""}
               >
                 <Instagram className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
               </a>

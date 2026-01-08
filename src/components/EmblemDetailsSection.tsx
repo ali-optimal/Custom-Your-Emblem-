@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import heroEmblem1 from "@/assets/hero-emblem-1.jpg";
+import heroEmblem1 from "@/assets/hero-emblem-2.jpg";
 
 const EmblemDetailsSection = () => {
   return (
-    <section className="relative py-20 bg-white overflow-hidden">
+    <section className="relative pt-20 pb-32 md:pb-40 bg-white overflow-hidden">
       {/* Subtle bottom gradient - only affects bottom portion */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-100/80 to-transparent" />
       
@@ -24,8 +24,8 @@ const EmblemDetailsSection = () => {
             <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-slate-100 to-white shadow-xl" />
             
             {/* Blue accent corners */}
-            <div className="absolute -top-2 -left-2 w-16 h-16 border-l-3 border-t-3 rounded-tl-xl" style={{ borderWidth: "3px", borderColor: "#006de4", borderRight: "none", borderBottom: "none" }} />
-            <div className="absolute -bottom-2 -right-2 w-16 h-16 border-r-3 border-b-3 rounded-br-xl" style={{ borderWidth: "3px", borderColor: "#006de4", borderLeft: "none", borderTop: "none" }} />
+            <div className="absolute -top-2 -left-2 w-16 h-16 border-l-3 border-t-3 rounded-tl-xl" style={{ borderWidth: "3px", borderColor: "rgb(104, 152, 204)", borderRight: "none", borderBottom: "none" }} />
+            <div className="absolute -bottom-2 -right-2 w-16 h-16 border-r-3 border-b-3 rounded-br-xl" style={{ borderWidth: "3px", borderColor: "rgb(104, 152, 204)", borderLeft: "none", borderTop: "none" }} />
             
             {/* Main image */}
             <div className="relative rounded-xl overflow-hidden shadow-2xl h-full">
@@ -50,15 +50,15 @@ const EmblemDetailsSection = () => {
           >
             {/* Section label */}
             <div className="inline-flex items-center gap-3 mb-4">
-              <span className="w-8 h-[2px]" style={{ background: "#006de4" }} />
-              <span className="font-body text-xs tracking-[0.2em] uppercase" style={{ color: "#006de4" }}>
+              <span className="w-8 h-[2px]" style={{ background: "rgb(104, 152, 204)" }} />
+              <span className="font-body text-xs tracking-[0.2em] uppercase" style={{ color: "rgb(104, 152, 204)" }}>
                 Emblem Details
               </span>
             </div>
 
             {/* Main heading */}
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-800 mb-6">
-              Crafted to Your <span style={{ color: "#006de4" }}>Specifications</span>
+              Crafted to Your <span style={{ color: "rgb(104, 152, 204)" }}>Specifications</span>
             </h2>
 
             {/* Description paragraphs */}
@@ -70,13 +70,13 @@ const EmblemDetailsSection = () => {
               {/* Specifications with icons */}
               <div className="py-4 space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ background: "#006de4" }} />
+                  <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ background: "rgb(104, 152, 204)" }} />
                   <p>
                     <strong className="text-slate-700">Length:</strong> Between 14cm (5.5 in) & 20cm (7.9 in) — dimensions depend on the number of characters.
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ background: "#006de4" }} />
+                  <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ background: "rgb(104, 152, 204)" }} />
                   <p>
                     <strong className="text-slate-700">Thickness:</strong> 3.0 millimeters (1/8 inch).
                   </p>
@@ -100,7 +100,7 @@ const EmblemDetailsSection = () => {
             <div className="mt-8">
               <button 
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-body text-sm font-medium text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
-                style={{ background: "linear-gradient(135deg, #006de4, #0052ab)" }}
+                style={{ background: "linear-gradient(135deg, rgb(104, 152, 204), rgb(72, 116, 163))" }}
               >
                 Contact Us
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

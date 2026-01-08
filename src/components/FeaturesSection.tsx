@@ -63,12 +63,12 @@ const FeatureCard = ({ feature, index, allCardsControls }: {
     >
       {/* Icon */}
       <div className="relative mb-6">
-        <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg" style={{ background: "linear-gradient(135deg, #006de4, #0052ab)", boxShadow: "0 10px 25px -5px rgba(0, 109, 228, 0.3)" }}>
+        <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg" style={{ background: "linear-gradient(135deg, #1e4266, #0d2847)", boxShadow: "0 10px 25px -5px rgba(30, 66, 102, 0.4)" }}>
           <feature.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
         </div>
         
         {/* Number badge */}
-        <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-blue-100 flex items-center justify-center font-display text-sm shadow-md" style={{ color: "#006de4" }}>
+        <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 border-slate-100 flex items-center justify-center font-display text-sm shadow-md" style={{ color: "#1e4266" }}>
           {index + 1}
         </span>
       </div>
@@ -106,7 +106,7 @@ const FeaturesSection = () => {
   }, [isInView, allCardsControls]);
 
   return (
-    <section ref={sectionRef} className="relative pt-16 pb-32 overflow-hidden -mt-8">
+    <section ref={sectionRef} className="relative pt-20 pb-40 overflow-hidden -mt-8">
       {/* SVG angled top - steeper angle */}
       <svg 
         className="absolute top-0 left-0 w-full h-16 md:h-24 z-10"
@@ -121,7 +121,7 @@ const FeaturesSection = () => {
       <div 
         className="absolute inset-0"
         style={{
-          background: "#006de4",
+          background: "linear-gradient(135deg, rgb(104, 152, 204) 0%, rgb(88, 129, 173) 50%, rgb(72, 116, 163) 100%)",
         }}
       />
       
@@ -139,9 +139,9 @@ const FeaturesSection = () => {
       <div 
         className="absolute top-20 right-0 w-1/3 h-1/2"
         style={{
-          background: "linear-gradient(180deg, #3d8ef0 0%, transparent 100%)",
+          background: "linear-gradient(180deg, #2a5080 0%, transparent 100%)",
           clipPath: "polygon(40% 0%, 100% 0%, 100% 60%, 0% 100%)",
-          opacity: 0.4,
+          opacity: 0.3,
         }}
       />
       
@@ -149,9 +149,9 @@ const FeaturesSection = () => {
       <div 
         className="absolute bottom-20 left-0 w-1/2 h-1/3"
         style={{
-          background: "linear-gradient(0deg, #0052ab 0%, transparent 100%)",
+          background: "linear-gradient(0deg, #1e4266 0%, transparent 100%)",
           clipPath: "polygon(0% 40%, 100% 0%, 100% 100%, 0% 100%)",
-          opacity: 0.4,
+          opacity: 0.3,
         }}
       />
       
@@ -175,8 +175,8 @@ const FeaturesSection = () => {
       />
       
       {/* Glowing accents */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sky-300/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-sky-200/15 rounded-full blur-[100px]" />
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-slate-300/8 rounded-full blur-[120px]" />
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Section Header */}
@@ -188,7 +188,7 @@ const FeaturesSection = () => {
         >
           <div className="inline-flex items-center gap-3 mb-4">
             <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-white/50" />
-            <span className="font-body text-xs tracking-[0.3em] uppercase text-sky-100">
+            <span className="font-body text-xs tracking-[0.3em] uppercase text-blue-100">
               Why Choose Us
             </span>
             <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-white/50" />
@@ -198,7 +198,7 @@ const FeaturesSection = () => {
             Custom Made Design
           </h2>
           
-          <p className="max-w-3xl mx-auto font-body text-sky-50/90 leading-relaxed text-base md:text-lg">
+          <p className="max-w-3xl mx-auto font-body text-blue-50/90 leading-relaxed text-base md:text-lg">
             Ready to offer personalized emblems to your friends and family or perhaps a treat for you as well to be installed on your car, bike... or anywhere you feel like?
           </p>
         </motion.div>

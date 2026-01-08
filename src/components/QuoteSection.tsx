@@ -17,7 +17,7 @@ const QuoteSection = () => {
         >
           {/* Decorative top line */}
           <div className="flex justify-center mb-6">
-            <div className="w-20 h-[2px] rounded-full" style={{ background: "linear-gradient(90deg, transparent, #006de4, transparent)" }} />
+            <div className="w-20 h-[2px] rounded-full" style={{ background: "linear-gradient(90deg, transparent, rgb(104, 152, 204), transparent)" }} />
           </div>
 
           {/* Quote text */}
@@ -29,18 +29,18 @@ const QuoteSection = () => {
 
           {/* Author with elegant styling */}
           <div className="mt-6 flex items-center justify-center gap-3">
-            <span className="w-6 h-[1px]" style={{ background: "#006de4" }} />
+            <span className="w-6 h-[1px]" style={{ background: "rgb(104, 152, 204)" }} />
             <p className="font-body text-sm">
-              <span className="font-semibold" style={{ color: "#006de4" }}>Dale Carnegie</span>
+              <span className="font-semibold" style={{ color: "rgb(104, 152, 204)" }}>Dale Carnegie</span>
               <span className="text-slate-300 mx-2">|</span>
               <span className="italic text-slate-500">How to Win Friends and Influence People</span>
             </p>
-            <span className="w-6 h-[1px]" style={{ background: "#006de4" }} />
+            <span className="w-6 h-[1px]" style={{ background: "rgb(104, 152, 204)" }} />
           </div>
 
           {/* Decorative bottom line */}
           <div className="flex justify-center mt-6">
-            <div className="w-20 h-[2px] rounded-full" style={{ background: "linear-gradient(90deg, transparent, #006de4, transparent)" }} />
+            <div className="w-20 h-[2px] rounded-full" style={{ background: "linear-gradient(90deg, transparent, rgb(104, 152, 204), transparent)" }} />
           </div>
         </motion.div>
       </div>

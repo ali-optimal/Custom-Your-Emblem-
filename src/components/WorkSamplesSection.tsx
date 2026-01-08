@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
-import heroEmblem1 from "@/assets/hero-emblem-1.jpg";
-import heroEmblem2 from "@/assets/hero-emblem-2.jpg";
-import heroEmblem3 from "@/assets/hero-emblem-3.jpg";
+import heroEmblem1 from "@/assets/396_portfolio.jpg";
+import heroEmblem2 from "@/assets/397_portfolio.jpg";
+import heroEmblem3 from "@/assets/398_portfolio.jpg";
 
 const samples = [
   {
@@ -96,17 +96,6 @@ const WorkSamplesSection = () => {
               </motion.div>
             ))}
           </div>
-
-          {/* Decorative bottom element */}
-          <div className="flex justify-center mt-12">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-slate-300" />
-              <div className="w-2 h-2 rounded-full" style={{ background: "#006de4" }} />
-              <div className="w-3 h-3 rounded-full border-2" style={{ borderColor: "#006de4" }} />
-              <div className="w-2 h-2 rounded-full" style={{ background: "#006de4" }} />
-              <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-slate-300" />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -141,18 +130,8 @@ const WorkSamplesSection = () => {
                 <img 
                   src={selectedImage.image} 
                   alt={selectedImage.title}
-                  className="w-full h-auto max-h-[70vh] object-contain"
+                  className="w-full h-auto max-h-[85vh] object-contain"
                 />
-                
-                {/* Info bar */}
-                <div className="p-6 text-center bg-white">
-                  <h3 className="font-display text-2xl font-semibold text-slate-800">
-                    {selectedImage.title}
-                  </h3>
-                  <p className="font-body text-slate-500 mt-1">
-                    {selectedImage.description}
-                  </p>
-                </div>
               </div>
               
               {/* Decorative frame */}

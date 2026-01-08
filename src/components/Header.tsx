@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import headerLogo from "@/assets/header logo.png";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Order", href: "#order" },
-  { name: "Gallery", href: "#gallery" },
-  { name: "FAQ", href: "#faq" },
-  { name: "Contact Us", href: "#contact" },
+  { name: "Home", href: "#home", type: "anchor" as const },
+  { name: "Testimonials", href: "/testimonials", type: "route" as const },
+  { name: "Order", href: "/orders", type: "route" as const },
+  { name: "Gallery", href: "/gallery", type: "route" as const },
+  { name: "FAQ", href: "/faq", type: "route" as const },
+  { name: "Contact Us", href: "/contact", type: "route" as const },
 ];
 
 const Header = () => {
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("#home");
   const [scrolled, setScrolled] = useState(false);
@@ -35,6 +38,26 @@ const Header = () => {
     };
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    if (location.pathname === "/testimonials") {
+      setActiveLink("/testimonials");
+    } else if (location.pathname === "/orders") {
+      setActiveLink("/orders");
+    } else if (location.pathname === "/gallery") {
+      setActiveLink("/gallery");
+    } else if (location.pathname === "/faq") {
+      setActiveLink("/faq");
+    } else if (location.pathname === "/contact") {
+      setActiveLink("/contact");
+    } else if (location.pathname === "/") {
+      setActiveLink(location.hash || "#home");
+    }
+  }, [location.pathname, location.hash]);
+
+  const getAnchorHref = (hashHref: string) => {
+    return location.pathname === "/" ? hashHref : `/${hashHref}`;
+  };
+
   return (
     <>
       <header 
@@ -48,12 +71,11 @@ const Header = () => {
           <div className="flex items-center justify-between">
             {/* Logo Section - Left */}
             <div className="flex flex-col">
-              <h1 
-                className={`font-display font-semibold tracking-[0.15em] uppercase text-gradient-luxury transition-all duration-500
-                  ${scrolled ? "text-lg md:text-xl" : "text-xl md:text-2xl"}`}
-              >
-                Your Custom Emblem
-              </h1>
+              <img
+                src={headerLogo}
+                alt="Your Custom Emblem"
+                className={`w-auto transition-all duration-500 ${scrolled ? "h-10" : "h-12"}`}
+              />
               
               <div className="flex items-center gap-2 mt-1">
                 <span className="w-6 h-[1px] bg-gradient-to-r from-white/40 to-transparent" />
@@ -68,39 +90,72 @@ const Header = () => {
 
             {/* Desktop Navigation - Right */}
             <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setActiveLink(link.href)}
-                  className="group relative px-4 py-2"
-                >
-                  <span 
-                    className={`relative z-10 font-body tracking-[0.1em] uppercase font-semibold transition-all duration-300
-                      ${scrolled ? "text-sm" : "text-base"}
-                      ${activeLink === link.href 
-                        ? "text-primary" 
-                        : "text-white group-hover:text-primary"
-                      }`}
+              {navLinks.map((link) => {
+                const linkContent = (
+                  <>
+                    <span 
+                      className={`relative z-10 font-body tracking-[0.1em] uppercase font-semibold transition-all duration-300
+                        ${scrolled ? "text-sm" : "text-base"}
+                        ${activeLink === link.href 
+                          ? "" 
+                          : "text-white"
+                        }`}
+                      style={activeLink === link.href ? { color: "rgb(104, 152, 204)" } : {}}
+                      onMouseEnter={(e) => {
+                        if (activeLink !== link.href) {
+                          e.currentTarget.style.color = "rgb(104, 152, 204)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeLink !== link.href) {
+                          e.currentTarget.style.color = "white";
+                        }
+                      }}
+                    >
+                      {link.name}
+                    </span>
+                    
+                    {/* Animated underline */}
+                    <span 
+                      className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] rounded-full transition-all duration-500 ease-out
+                        ${activeLink === link.href 
+                          ? "w-6 opacity-100" 
+                          : "w-0 opacity-0 group-hover:w-5 group-hover:opacity-70"
+                        }`}
+                      style={{ background: "linear-gradient(to right, rgba(104, 152, 204, 0.6), rgb(104, 152, 204), rgba(104, 152, 204, 0.6))" }}
+                    />
+                    
+                    {/* Subtle hover glow */}
+                    <span 
+                      className="absolute inset-0 rounded-lg bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </>
+                );
+
+                if (link.type === "route") {
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      onClick={() => setActiveLink(link.href)}
+                      className="group relative px-4 py-2"
+                    >
+                      {linkContent}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <a
+                    key={link.name}
+                    href={getAnchorHref(link.href)}
+                    onClick={() => setActiveLink(link.href)}
+                    className="group relative px-4 py-2"
                   >
-                    {link.name}
-                  </span>
-                  
-                  {/* Animated underline */}
-                  <span 
-                    className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-primary/60 via-primary to-primary/60 rounded-full transition-all duration-500 ease-out
-                      ${activeLink === link.href 
-                        ? "w-6 opacity-100" 
-                        : "w-0 opacity-0 group-hover:w-5 group-hover:opacity-70"
-                      }`}
-                  />
-                  
-                  {/* Subtle hover glow */}
-                  <span 
-                    className="absolute inset-0 rounded-lg bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
-                </a>
-              ))}
+                    {linkContent}
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Mobile Menu Button */}
@@ -127,7 +182,7 @@ const Header = () => {
 
       {/* Mobile Sidebar */}
       <div 
-        className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 transition-transform duration-500 ease-out
+        className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 transition-transform duration-500 ease-out rounded-l-[40px]
           ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Close button */}
@@ -140,38 +195,55 @@ const Header = () => {
 
         {/* Logo in sidebar */}
         <div className="pt-16 px-6 pb-6 border-b border-primary/10">
-          <h2 className="font-display font-semibold text-lg tracking-[0.1em] uppercase text-gradient-luxury">
-            Your Custom Emblem
-          </h2>
-          <p className="font-body text-[10px] text-muted-foreground tracking-[0.15em] uppercase mt-1">
-            Specially designed for you
-          </p>
+          <img
+            src={headerLogo}
+            alt="Your Custom Emblem"
+            className="h-10 w-auto opacity-80"
+          />
         </div>
 
         {/* Nav links */}
         <nav className="py-6 px-4">
-          {navLinks.map((link, index) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => {
+          {navLinks.map((link, index) => {
+            const commonProps = {
+              onClick: () => {
                 setActiveLink(link.href);
                 setMobileMenuOpen(false);
-              }}
-              className={`block py-4 px-4 font-body text-sm tracking-[0.12em] uppercase rounded-xl transition-all duration-300 mb-1
+              },
+              className: `block py-4 px-4 font-body text-sm tracking-[0.12em] uppercase rounded-xl transition-all duration-300 mb-1
                 ${activeLink === link.href 
                   ? "text-primary font-medium bg-primary/5" 
                   : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                }`}
-              style={{
+                }`,
+              style: {
                 opacity: mobileMenuOpen ? 1 : 0,
                 transform: mobileMenuOpen ? "translateX(0)" : "translateX(20px)",
                 transition: `all 0.4s ease-out ${index * 0.05}s`,
-              }}
-            >
-              {link.name}
-            </a>
-          ))}
+              },
+            };
+
+            if (link.type === "route") {
+              return (
+                <Link
+                  key={link.name}
+                  {...commonProps}
+                  to={link.href}
+                >
+                  {link.name}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={link.name}
+                {...commonProps}
+                href={getAnchorHref(link.href)}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Decorative element */}

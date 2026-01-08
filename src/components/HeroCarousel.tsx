@@ -1,32 +1,32 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import heroEmblem1 from "@/assets/hero-emblem-1.jpg";
-import heroEmblem2 from "@/assets/hero-emblem-2.jpg";
-import heroEmblem3 from "@/assets/hero-emblem-3.jpg";
-import heroEmblem4 from "@/assets/hero-emblem-4.jpg";
+import heroEmblem1 from "@/assets/49_banners.jpg";
+import heroEmblem2 from "@/assets/52_banners.jpg";
+import heroEmblem3 from "@/assets/46_banners.jpg";
+import heroEmblem4 from "@/assets/Screenshot 2026-01-07 144924.png";
 
 const slides = [
   {
     image: heroEmblem1,
-    title: "Precision Crafted Excellence",
-    subtitle: "Premium Materials",
+    title: "Track Special Emblem in 100% Stainless steel matt finishing installed inside the Ferrari 488 PISTA",
+    subtitle: "Ferrari 488 PISTA",
     year: "2024",
   },
   {
     image: heroEmblem2,
-    title: "Artisan Craftsmanship",
-    subtitle: "Traditional Techniques",
+    title: "Jayden T Emblem in stainless steel mirror finishing / design done as requested",
+    subtitle: "Custom Design",
     year: "2024",
   },
   {
     image: heroEmblem3,
-    title: "Exclusive Collection",
-    subtitle: "24K Gold Finishes",
+    title: "Electric Emblem in 100% stainless steel installed on his EV 1966 Porsche 912 - design as requested",
+    subtitle: "1966 Porsche 912",
     year: "2024",
   },
   {
     image: heroEmblem4,
-    title: "Modern Elegance",
-    subtitle: "Chrome & Blue Metallic",
+    title: "Dev Naidu Emblem in 100% Stainless steel matt finishing installed inside the Ferrari",
+    subtitle: "Ferrari Custom",
     year: "2024",
   },
 ];
@@ -70,13 +70,13 @@ const HeroCarousel = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen w-full pt-32 pb-16 overflow-hidden bg-black border-b border-white/10">
+    <section id="home" className="relative min-h-screen w-full pt-20 md:pt-32 pb-8 md:pb-16 overflow-hidden bg-black border-b border-white/10">
       {/* Dark background */}
       <div className="absolute inset-0 bg-black" />
 
-      <div className="relative z-10 w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2">
+      <div className="relative z-10 w-full max-w-[95vw] xl:max-w-[90vw] mx-auto px-2 mt-4">
         {/* Desktop Gallery - All 4 images visible */}
-        <div className="hidden md:flex relative items-center justify-center gap-3 h-[60vh] max-h-[520px]">
+        <div className="hidden md:flex relative items-center justify-center gap-3 h-[75vh] max-h-[700px]">
           {slides.map((slide, index) => {
             const position = getPosition(index);
             const isActive = position === "center";
@@ -84,37 +84,37 @@ const HeroCarousel = () => {
             // Style based on position - all 4 visible
             let opacity = 1;
             let zIndex = 10;
-            let flex = "0.5";
-            let height = "75%";
+            let flex = "0.35";
+            let height = "55%";
             let grayscale = "60%";
             
             switch (position) {
               case "center":
                 opacity = 1;
                 zIndex = 30;
-                flex = "1.8";
+                flex = "2.2";
                 height = "100%";
                 grayscale = "0%";
                 break;
               case "left-1":
                 opacity = 1;
                 zIndex = 20;
-                flex = "0.7";
-                height = "85%";
+                flex = "0.5";
+                height = "65%";
                 grayscale = "50%";
                 break;
               case "right-1":
                 opacity = 1;
                 zIndex = 20;
-                flex = "0.7";
-                height = "85%";
+                flex = "0.5";
+                height = "65%";
                 grayscale = "50%";
                 break;
               case "right-2":
                 opacity = 0.8;
                 zIndex = 15;
-                flex = "0.5";
-                height = "75%";
+                flex = "0.35";
+                height = "55%";
                 grayscale = "70%";
                 break;
             }
@@ -190,7 +190,7 @@ const HeroCarousel = () => {
         </div>
 
         {/* Mobile Gallery - Single full-width image */}
-        <div className="md:hidden relative h-[55vh] max-h-[450px]">
+        <div className="md:hidden relative h-[65vh] max-h-[550px]">
           {slides.map((slide, index) => {
             const isActive = index === activeIndex;
             
@@ -246,7 +246,7 @@ const HeroCarousel = () => {
               className="relative h-2 rounded-full overflow-hidden transition-all duration-400 border border-white/20"
               style={{
                 width: index === activeIndex ? "40px" : "12px",
-                backgroundColor: index === activeIndex ? "hsl(var(--primary))" : "rgba(255, 255, 255, 0.2)",
+                backgroundColor: index === activeIndex ? "rgb(104, 152, 204)" : "rgba(255, 255, 255, 0.2)",
               }}
               aria-label={`Go to slide ${index + 1}`}
             />
