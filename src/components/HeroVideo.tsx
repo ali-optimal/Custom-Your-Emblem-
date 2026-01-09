@@ -91,6 +91,7 @@ const HeroVideo = () => {
             loop
             muted
             playsInline
+            preload="auto"
             onLoadedData={() => setIsLoaded(true)}
           >
             <source src={heroVideo} type="video/mp4" />

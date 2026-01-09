@@ -14,6 +14,7 @@ import FAQ from "./pages/FAQ";
 import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
 import Preloader from "./components/Preloader";
+import ImagePreloader from "./components/ImagePreloader";
 
 const queryClient = new QueryClient();
 
@@ -32,29 +33,26 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <ImagePreloader />
         <AnimatePresence mode="wait">
           {isLoading && <Preloader key="preloader" />}
         </AnimatePresence>
         
-        {!isLoading && (
-          <>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/testimonials" element={<Testimonials />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/gallery/:albumId" element={<Album />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/contact" element={<ContactUs />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </>
-        )}
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/:albumId" element={<Album />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<ContactUs />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );
