@@ -15,6 +15,7 @@ import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
 import Preloader from "./components/Preloader";
 import ImagePreloader from "./components/ImagePreloader";
+import PersistentBackground from "./components/PersistentBackground";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <PersistentBackground />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/testimonials" element={<Testimonials />} />

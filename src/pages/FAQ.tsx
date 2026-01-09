@@ -59,10 +59,7 @@ const FAQItem = ({ item, index }: { item: typeof faqs[0], index: number }) => {
   return (
     <div style={{ perspective: "1000px" }}>
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: index * 0.1 }}
-        viewport={{ once: true, margin: "-100px" }}
+        initial={{ opacity: 1, y: 0 }}
         whileHover={{ 
           y: -15, 
           scale: 1.02,
@@ -70,7 +67,7 @@ const FAQItem = ({ item, index }: { item: typeof faqs[0], index: number }) => {
           rotateY: 2,
           boxShadow: "0 25px 50px -12px rgba(104, 152, 204, 0.2)"
         }}
-        className="group bg-white p-8 md:p-10 h-full border border-slate-200/60 hover:border-[#6898cc]/40 transition-all duration-500 relative shadow-xl hover:shadow-2xl overflow-hidden rounded-2xl"
+        className="group bg-white p-8 md:p-10 h-full border border-slate-200/60 md:hover:border-[#6898cc]/40 transition-all duration-500 relative shadow-xl md:hover:shadow-2xl overflow-hidden rounded-2xl"
       >
         {/* Decorative corner shape */}
         <div className="absolute -top-12 -right-12 w-24 h-24 bg-slate-100 rounded-full group-hover:bg-[#6898cc]/10 transition-colors duration-500" />
@@ -204,7 +201,7 @@ const FAQ = () => {
       </section>
       
       {/* FAQ Grid Section */}
-      <main className="bg-slate-50 pt-48 pb-40 px-4 md:px-6 min-h-screen relative z-10">
+      <main className="bg-slate-50 pt-16 md:pt-48 pb-40 px-4 md:px-6 min-h-screen relative z-10">
         <div className="container mx-auto max-w-7xl">
            {/* Section Title */}
            <div className="mb-20 flex items-end justify-between border-b border-slate-200 pb-8">
