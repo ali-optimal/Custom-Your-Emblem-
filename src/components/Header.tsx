@@ -185,36 +185,33 @@ const Header = () => {
 
       {/* Mobile Sidebar Overlay */}
       <div 
-        className={`lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300
+        className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] transition-opacity duration-300
           ${mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={() => setMobileMenuOpen(false)}
       />
 
       {/* Mobile Sidebar */}
       <div 
-        className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 transition-transform duration-500 ease-out
+        className={`lg:hidden fixed top-0 right-0 h-full w-[85%] sm:w-80 md:w-96 bg-black rounded-l-[40px] shadow-2xl z-[100] transition-transform duration-500 ease-out border-l border-white/10
           ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Close button */}
         <button
-          className="absolute top-5 right-5 p-2 text-muted-foreground hover:text-primary transition-colors"
+          className="absolute top-6 right-6 p-3 text-white/50 hover:text-white transition-all bg-white/5 rounded-full"
           onClick={() => setMobileMenuOpen(false)}
         >
           <X size={24} />
         </button>
 
         {/* Logo in sidebar */}
-        <div className="pt-16 px-6 pb-6 border-b border-primary/10">
-          <h2 className="font-display font-semibold text-lg tracking-[0.1em] uppercase text-gradient-luxury">
-            Your Custom Emblem
-          </h2>
-          <p className="font-body text-[10px] text-muted-foreground tracking-[0.15em] uppercase mt-1">
+        <div className="pt-20 px-8 pb-8 border-b border-white/5">
+          <p className="font-body text-[10px] text-white/40 tracking-[0.2em] uppercase mt-1">
             Specially designed for you
           </p>
         </div>
 
         {/* Nav links */}
-        <nav className="py-6 px-4">
+        <nav className="py-8 px-6">
           {navLinks.map((link, index) => {
             const isActive = activeLink === link.href || (link.hash && activeLink === link.hash);
             const commonProps = {
@@ -231,10 +228,10 @@ const Header = () => {
                 }
                 setMobileMenuOpen(false);
               },
-              className: `block py-4 px-4 font-body text-sm tracking-[0.12em] uppercase rounded-xl transition-all duration-300 mb-1
+              className: `block py-4 px-6 font-body text-sm tracking-[0.15em] uppercase rounded-2xl transition-all duration-300 mb-2
                 ${isActive 
-                  ? "text-primary font-medium bg-primary/5" 
-                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                  ? "text-white font-bold bg-white/10" 
+                  : "text-white/60 hover:text-white hover:bg-white/5"
                 }`,
               style: {
                 opacity: mobileMenuOpen ? 1 : 0,
@@ -268,8 +265,8 @@ const Header = () => {
         </nav>
 
         {/* Decorative element */}
-        <div className="absolute bottom-8 left-6 right-6">
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+        <div className="absolute bottom-10 left-8 right-8">
+          <div className="h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         </div>
       </div>
     </>

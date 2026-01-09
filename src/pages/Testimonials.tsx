@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import Header from "@/components/Header";
@@ -36,6 +36,10 @@ const flagUrlFromIsoCode2x = (code: string) => {
 
 const Testimonials = () => {
   const { toast } = useToast();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const testimonials = useMemo<Testimonial[]>(
     () => [

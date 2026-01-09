@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState } from "react";
 import heroVideo from "@/assets/hero video.mov";
+import heroPoster from "@/assets/hero-emblem-2.jpg";
 import { motion } from "framer-motion";
 
 const sentences = [
-  "FORGED IN STAINLESS STEEL",
+  "FORGED IN Chrome",
   "DOMINATE THE ROAD",
-  "PRECISION CRAFTED. HAND FINISHED.",
+  "PRECISION CRAFTED.",
   "UNLEASH YOUR VEHICLE'S IDENTITY",
 ];
 
@@ -67,7 +68,7 @@ const HeroVideo = () => {
       
       {/* Ambient glow effect */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-600/20 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#6898cc]/10 rounded-full blur-[120px] animate-pulse" />
       </div>
 
       {/* Video Container - Full Width */}
@@ -75,7 +76,7 @@ const HeroVideo = () => {
         <div className="relative w-full h-full">
           {/* Loading placeholder */}
           {!isLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-black z-30">
+            <div className="absolute inset-0 flex items-center justify-center bg-[#070b14] z-30">
               <div className="text-center">
                 <div className="relative w-24 h-24 mx-auto mb-6">
                   {/* Drifting Smoke/Skid Marks */}
@@ -95,7 +96,7 @@ const HeroVideo = () => {
                           delay: i * 0.2,
                           ease: "easeOut" 
                         }}
-                        className="absolute w-6 h-6 bg-white/20 rounded-full blur-md"
+                        className="absolute w-6 h-6 bg-white/10 rounded-full blur-md"
                       />
                     ))}
                   </div>
@@ -114,13 +115,13 @@ const HeroVideo = () => {
                     }}
                     className="relative z-10 w-full h-full"
                   >
-                    <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]">
+                    <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_15px_rgba(104,152,204,0.6)]">
                       {/* Tire */}
-                      <circle cx="50" cy="50" r="45" stroke="#1a1a1a" strokeWidth="8" fill="none" />
-                      <circle cx="50" cy="50" r="45" stroke="#dc2626" strokeWidth="2" fill="none" strokeDasharray="10 5" />
+                      <circle cx="50" cy="50" r="45" stroke="#111" strokeWidth="8" fill="none" />
+                      <circle cx="50" cy="50" r="45" stroke="#6898cc" strokeWidth="2" fill="none" strokeDasharray="10 5" />
                       
                       {/* Rim */}
-                      <circle cx="50" cy="50" r="32" fill="#2d2d2d" stroke="#dc2626" strokeWidth="1" />
+                      <circle cx="50" cy="50" r="32" fill="#1a1a1a" stroke="#6898cc" strokeWidth="1" />
                       
                       {/* Spokes */}
                       {[0, 60, 120, 180, 240, 300].map((angle) => (
@@ -129,19 +130,19 @@ const HeroVideo = () => {
                           x1="50" y1="50"
                           x2={50 + 30 * Math.cos(angle * Math.PI / 180)}
                           y2={50 + 30 * Math.sin(angle * Math.PI / 180)}
-                          stroke="#dc2626"
+                          stroke="#6898cc"
                           strokeWidth="4"
                           strokeLinecap="round"
                         />
                       ))}
                       
                       {/* Center hub */}
-                      <circle cx="50" cy="50" r="8" fill="#1a1a1a" stroke="#dc2626" strokeWidth="2" />
-                      <circle cx="50" cy="50" r="3" fill="#dc2626" />
+                      <circle cx="50" cy="50" r="8" fill="#111" stroke="#6898cc" strokeWidth="2" />
+                      <circle cx="50" cy="50" r="3" fill="#6898cc" />
                     </svg>
                   </motion.div>
                 </div>
-                <p className="text-white/60 font-light tracking-wider uppercase">Unleashing Experience...</p>
+                <p className="text-white/40 text-xs font-light tracking-[0.2em] uppercase">Unleashing Experience</p>
               </div>
             </div>
           )}
@@ -155,8 +156,10 @@ const HeroVideo = () => {
             muted
             playsInline
             preload="auto"
+            poster={heroPoster}
             onLoadedData={() => setIsLoaded(true)}
           >
+            <source src={heroVideo} type="video/quicktime" />
             <source src={heroVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -198,7 +201,7 @@ const HeroVideo = () => {
               repeat: Infinity, 
               ease: "easeInOut" 
             }}
-            className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent via-red-500 to-transparent"
+            className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent via-[#6898cc]/30 to-transparent"
           />
         </div>
       </div>
