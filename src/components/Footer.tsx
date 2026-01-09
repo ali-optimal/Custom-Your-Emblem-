@@ -168,14 +168,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Animated Brand Text - Desktop Only */}
-        <div className="hidden md:flex justify-start items-center pt-[15px] opacity-50 hover:opacity-100 transition-opacity duration-700">
-           <h2 className="font-display text-2xl md:text-3xl font-bold text-white/90 uppercase tracking-[0.5em] text-left min-h-[40px] drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-             {displayedText}
-             <span className="animate-pulse text-blue-500">_</span>
-           </h2>
-        </div>
-
         {/* Logo and Tagline with Social Links - Mobile Only */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:hidden">
           <div className="flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
