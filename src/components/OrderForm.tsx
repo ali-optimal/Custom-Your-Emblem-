@@ -130,19 +130,28 @@ const OrderForm = () => {
         <div className="flex items-center justify-center mb-16">
           <div className="flex items-center w-full max-w-md">
             <div className="relative flex flex-col items-center flex-1">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors duration-300 ${step >= 1 ? "bg-black border-black text-white" : "border-gray-300 text-gray-300"}`}>
+              <div 
+                className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors duration-300 ${step >= 1 ? "border-transparent text-white shadow-md" : "border-gray-300 text-gray-300"}`}
+                style={step >= 1 ? { background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" } : {}}
+              >
                 {step > 1 ? <Check size={20} /> : "1"}
               </div>
-              <span className={`absolute -bottom-7 font-body text-xs uppercase tracking-widest whitespace-nowrap ${step >= 1 ? "text-black font-bold" : "text-gray-400"}`}>Emblem Details</span>
+              <span className={`absolute -bottom-7 font-body text-xs uppercase tracking-widest whitespace-nowrap ${step >= 1 ? "text-[#0f172a] font-bold" : "text-gray-400"}`}>Emblem Details</span>
             </div>
             
-            <div className={`flex-1 h-[2px] mx-4 transition-colors duration-300 ${step > 1 ? "bg-black" : "bg-gray-200"}`} />
+            <div 
+              className={`flex-1 h-[2px] mx-4 transition-colors duration-300 ${step > 1 ? "bg-[#0f172a]" : "bg-gray-200"}`} 
+              style={step > 1 ? { background: "linear-gradient(90deg, #0f172a, #1e293b)" } : {}}
+            />
             
             <div className="relative flex flex-col items-center flex-1">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors duration-300 ${step === 2 ? "bg-black border-black text-white" : "border-gray-300 text-gray-300"}`}>
+              <div 
+                className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors duration-300 ${step === 2 ? "border-transparent text-white shadow-md" : "border-gray-300 text-gray-300"}`}
+                style={step === 2 ? { background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" } : {}}
+              >
                 2
               </div>
-              <span className={`absolute -bottom-7 font-body text-xs uppercase tracking-widest whitespace-nowrap ${step === 2 ? "text-black font-bold" : "text-gray-400"}`}>Shipping Details</span>
+              <span className={`absolute -bottom-7 font-body text-xs uppercase tracking-widest whitespace-nowrap ${step === 2 ? "text-[#0f172a] font-bold" : "text-gray-400"}`}>Shipping Details</span>
             </div>
           </div>
         </div>
@@ -160,7 +169,7 @@ const OrderForm = () => {
                   exit={{ opacity: 0, x: 20 }}
                   className="space-y-10"
                 >
-                  <h2 className="text-3xl font-heading text-black border-b pb-4">Your Emblem Details</h2>
+                  <h2 className="text-3xl font-heading text-[#0f172a] border-b pb-4">Your Emblem Details</h2>
                   
                   {/* Custom Name */}
                   <div className="space-y-4">
@@ -170,7 +179,7 @@ const OrderForm = () => {
                     <Input 
                       id="customName"
                       placeholder="Enter the name for your emblem"
-                      className="h-12 border-gray-200 focus:border-black transition-all text-black bg-white"
+                      className="h-12 border-gray-200 focus:border-[#0f172a] transition-all text-[#0f172a] bg-white"
                       value={formData.customName}
                       onChange={(e) => setFormData({...formData, customName: e.target.value})}
                     />
@@ -186,8 +195,8 @@ const OrderForm = () => {
                     >
                       {materials.map((m) => (
                         <div key={m.id} className="flex items-center space-x-3 group cursor-pointer">
-                          <RadioGroupItem value={m.id} id={`material-${m.id}`} className="border-gray-300 text-black bg-white" />
-                          <Label htmlFor={`material-${m.id}`} className="text-gray-600 font-body cursor-pointer transition-colors group-hover:text-black">
+                          <RadioGroupItem value={m.id} id={`material-${m.id}`} className="border-gray-300 text-[#0f172a] bg-white" />
+                          <Label htmlFor={`material-${m.id}`} className="text-gray-600 font-body cursor-pointer transition-colors group-hover:text-[#0f172a]">
                             {m.label}
                           </Label>
                         </div>
@@ -289,7 +298,8 @@ const OrderForm = () => {
                   </div>
 
                   <Button 
-                    className="w-full h-14 bg-black hover:bg-gray-900 text-white uppercase tracking-[0.3em] font-bold text-lg rounded-none transition-all group"
+                    className="w-full h-14 text-white uppercase tracking-[0.3em] font-bold text-lg rounded-none transition-all group shadow-xl"
+                    style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" }}
                     onClick={handleNext}
                   >
                     Next <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -303,7 +313,7 @@ const OrderForm = () => {
                   exit={{ opacity: 0, x: -20 }}
                   className="space-y-6"
                 >
-                  <h2 className="text-3xl font-heading text-black border-b pb-4">Shipping Details</h2>
+                  <h2 className="text-3xl font-heading text-[#0f172a] border-b pb-4">Shipping Details</h2>
                   
                   <div className="space-y-4">
                     <Input placeholder="Name" className="h-12 border-gray-200 bg-white text-black" />
@@ -332,13 +342,14 @@ const OrderForm = () => {
                   <div className="flex flex-col md:flex-row gap-4 pt-8">
                     <Button 
                       variant="outline"
-                      className="h-14 flex-1 border-black text-black hover:bg-gray-100 uppercase tracking-widest font-bold"
+                      className="h-14 flex-1 border-[#0f172a] text-[#0f172a] hover:bg-slate-50 uppercase tracking-widest font-bold"
                       onClick={() => setStep(1)}
                     >
                       <ArrowLeft className="mr-2" size={20} /> Back
                     </Button>
                     <Button 
-                      className="h-14 flex-[2] bg-black hover:bg-gray-900 text-white uppercase tracking-[0.2em] font-bold text-lg rounded-none transition-all group"
+                      className="h-14 flex-[2] text-white uppercase tracking-[0.2em] font-bold text-lg rounded-none transition-all group shadow-xl"
+                      style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" }}
                     >
                       Proceed to Payment <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -351,7 +362,7 @@ const OrderForm = () => {
           {/* Right Sidebar - Order Info */}
           <div className="lg:col-span-1">
             <div className="sticky top-32 bg-gray-50 border border-gray-100 p-8 rounded-xl space-y-8">
-              <h3 className="text-xl font-heading text-black tracking-wider uppercase border-b border-gray-200 pb-4">Your Order Info</h3>
+              <h3 className="text-xl font-heading text-[#0f172a] tracking-wider uppercase border-b border-gray-200 pb-4">Your Order Info</h3>
               
               {/* Emblem Preview */}
               {formData.customName && (
@@ -407,7 +418,7 @@ const OrderForm = () => {
                 <div className="pt-6 border-t border-black/10 mt-6">
                   <div className="flex justify-between items-end">
                     <span className="text-xs uppercase tracking-[0.2em] font-bold text-gray-400">Grand Total</span>
-                    <span className="text-3xl font-heading text-black">US${grandTotal}</span>
+                    <span className="text-3xl font-heading text-[#0f172a]">US${grandTotal}</span>
                   </div>
                 </div>
               </div>

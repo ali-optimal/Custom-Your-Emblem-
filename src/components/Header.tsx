@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import headerLogo from "@/assets/header logo.png";
+import headerLogo from "@/assets/Gemini_Generated_Image_jrw14vjrw14vjrw1 (1).png";
 
 const navLinks = [
-  { name: "Home", href: "#home", type: "anchor" as const },
+  { name: "Home", href: "/", type: "route" as const, hash: "#home" },
   { name: "Testimonials", href: "/testimonials", type: "route" as const },
   { name: "Order", href: "/orders", type: "route" as const },
   { name: "Gallery", href: "/gallery", type: "route" as const },
@@ -17,6 +17,10 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("#home");
   const [scrolled, setScrolled] = useState(false);
+
+  const isHomePage = location.pathname === "/";
+  // Always use luxury background to ensure it's visible at the top as requested
+  const useLuxuryBg = true;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,18 +43,10 @@ const Header = () => {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    if (location.pathname === "/testimonials") {
-      setActiveLink("/testimonials");
-    } else if (location.pathname === "/orders") {
-      setActiveLink("/orders");
-    } else if (location.pathname === "/gallery") {
-      setActiveLink("/gallery");
-    } else if (location.pathname === "/faq") {
-      setActiveLink("/faq");
-    } else if (location.pathname === "/contact") {
-      setActiveLink("/contact");
-    } else if (location.pathname === "/") {
+    if (location.pathname === "/") {
       setActiveLink(location.hash || "#home");
+    } else {
+      setActiveLink(location.pathname);
     }
   }, [location.pathname, location.hash]);
 
@@ -61,13 +57,16 @@ const Header = () => {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out border-b border-white/10
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ease-out
           ${scrolled 
-            ? "bg-black shadow-lg py-3" 
-            : "bg-black py-5"
-          }`}
+            ? "shadow-lg py-3 border-b border-white/10" 
+            : "py-5"
+          }
+          ${!useLuxuryBg ? "bg-transparent" : ""}
+        `}
+        style={useLuxuryBg ? { background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" } : {}}
       >
-        <div className="container mx-auto px-4 sm:px-6">
+        <div className="container mx-auto px-6">
           <div className="flex items-center justify-between">
             {/* Logo Section - Left */}
             <div className="flex flex-col">
@@ -91,23 +90,24 @@ const Header = () => {
             {/* Desktop Navigation - Right */}
             <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
+                const isActive = activeLink === link.href || (link.hash && activeLink === link.hash);
                 const linkContent = (
                   <>
                     <span 
                       className={`relative z-10 font-body tracking-[0.1em] uppercase font-semibold transition-all duration-300
                         ${scrolled ? "text-sm" : "text-base"}
-                        ${activeLink === link.href 
+                        ${isActive 
                           ? "" 
                           : "text-white"
                         }`}
-                      style={activeLink === link.href ? { color: "rgb(104, 152, 204)" } : {}}
+                      style={isActive ? { color: "rgb(104, 152, 204)" } : {}}
                       onMouseEnter={(e) => {
-                        if (activeLink !== link.href) {
+                        if (!isActive) {
                           e.currentTarget.style.color = "rgb(104, 152, 204)";
                         }
                       }}
                       onMouseLeave={(e) => {
-                        if (activeLink !== link.href) {
+                        if (!isActive) {
                           e.currentTarget.style.color = "white";
                         }
                       }}
@@ -118,7 +118,7 @@ const Header = () => {
                     {/* Animated underline */}
                     <span 
                       className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] rounded-full transition-all duration-500 ease-out
-                        ${activeLink === link.href 
+                        ${isActive 
                           ? "w-6 opacity-100" 
                           : "w-0 opacity-0 group-hover:w-5 group-hover:opacity-70"
                         }`}
@@ -137,7 +137,18 @@ const Header = () => {
                     <Link
                       key={link.name}
                       to={link.href}
-                      onClick={() => setActiveLink(link.href)}
+                      onClick={(e) => {
+                        if (link.hash && location.pathname === "/") {
+                          e.preventDefault();
+                          const element = document.querySelector(link.hash);
+                          if (element) {
+                            element.scrollIntoView({ behavior: "smooth" });
+                            setActiveLink(link.hash);
+                          }
+                        } else {
+                          setActiveLink(link.href);
+                        }
+                      }}
                       className="group relative px-4 py-2"
                     >
                       {linkContent}
@@ -182,38 +193,49 @@ const Header = () => {
 
       {/* Mobile Sidebar */}
       <div 
-        className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-black shadow-2xl z-50 transition-transform duration-500 ease-out rounded-l-[40px]
+        className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 transition-transform duration-500 ease-out
           ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Close button */}
         <button
-          className="absolute top-5 right-5 p-2 text-white/70 hover:text-[#6898cc] transition-colors"
+          className="absolute top-5 right-5 p-2 text-muted-foreground hover:text-primary transition-colors"
           onClick={() => setMobileMenuOpen(false)}
         >
           <X size={24} />
         </button>
 
         {/* Logo in sidebar */}
-        <div className="pt-16 px-6 pb-6 border-b border-white/10">
-          <img
-            src={headerLogo}
-            alt="Your Custom Emblem"
-            className="h-10 w-auto opacity-100"
-          />
+        <div className="pt-16 px-6 pb-6 border-b border-primary/10">
+          <h2 className="font-display font-semibold text-lg tracking-[0.1em] uppercase text-gradient-luxury">
+            Your Custom Emblem
+          </h2>
+          <p className="font-body text-[10px] text-muted-foreground tracking-[0.15em] uppercase mt-1">
+            Specially designed for you
+          </p>
         </div>
 
         {/* Nav links */}
         <nav className="py-6 px-4">
           {navLinks.map((link, index) => {
+            const isActive = activeLink === link.href || (link.hash && activeLink === link.hash);
             const commonProps = {
-              onClick: () => {
-                setActiveLink(link.href);
+              onClick: (e: any) => {
+                if (link.hash && location.pathname === "/") {
+                  e.preventDefault();
+                  const element = document.querySelector(link.hash);
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                    setActiveLink(link.hash);
+                  }
+                } else {
+                  setActiveLink(link.href);
+                }
                 setMobileMenuOpen(false);
               },
               className: `block py-4 px-4 font-body text-sm tracking-[0.12em] uppercase rounded-xl transition-all duration-300 mb-1
-                ${activeLink === link.href 
-                  ? "text-[#6898cc] font-medium bg-white/5" 
-                  : "text-white/70 hover:text-[#6898cc] hover:bg-white/5"
+                ${isActive 
+                  ? "text-primary font-medium bg-primary/5" 
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
                 }`,
               style: {
                 opacity: mobileMenuOpen ? 1 : 0,

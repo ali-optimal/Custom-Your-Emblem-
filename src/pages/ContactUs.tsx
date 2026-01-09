@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Mail, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Mail, Send, CheckCircle2, ArrowDown } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import contactImage from "@/assets/ChatGPT Image Jan 9, 2026, 11_26_28 AM.png";
 
 const ContactUs = () => {
   const { toast } = useToast();
@@ -48,197 +49,214 @@ const ContactUs = () => {
     <div className="min-h-screen bg-slate-50">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative bg-black pt-32 pb-24 overflow-hidden">
-        <div className="absolute top-20 left-10 w-32 h-32 rounded-full border border-white/10 opacity-30" />
-        <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full border border-white/5 opacity-40" />
-
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      {/* Hero Section - Luxury Redesign */}
+      <section 
+        className="relative h-[90vh] flex flex-col items-center justify-center overflow-hidden"
+        style={{ background: "linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" }}
+      >
+        {/* Animated Geometric Shapes */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            animate={{
+              rotate: 360,
+              x: [0, 100, 0],
+              y: [0, -50, 0],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/4 left-1/4 w-64 h-64 border border-white/10 rounded-full"
+          />
+          <motion.div
+            animate={{
+              rotate: -360,
+              x: [0, -80, 0],
+              y: [0, 100, 0],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 border border-white/10 rounded-[40%]"
+          />
+          <motion.div
+            animate={{
+              opacity: [0.1, 0.3, 0.1],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{ duration: 8, repeat: Infinity }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px]"
+          />
+        </div>
+
+        <div className="container mx-auto px-4 z-10 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-3 mb-4">
-              <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-white/40" />
-              <span className="font-body text-xs tracking-[0.3em] uppercase text-white/60">
-                Get In Touch
+            <div className="inline-block mb-6">
+              <span className="py-1 px-3 border border-white/20 rounded-full text-[10px] md:text-xs font-body tracking-[0.3em] text-[#6898cc] uppercase bg-white/5 backdrop-blur-sm">
+                Connect With Us
               </span>
-              <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-white/40" />
             </div>
-
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-              Contact Us
+            
+            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tighter leading-none">
+              LET'S CREATE<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50">SOMETHING NEW</span>
             </h1>
             
-            <p className="text-white/70 font-body text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-              Have a question or ready to create your custom emblem? We're here to help!
+            <p className="max-w-2xl mx-auto text-slate-400 font-body text-lg md:text-xl tracking-wide leading-relaxed">
+              Experience the pinnacle of automotive customization. Reach out to our design experts today.
             </p>
           </motion.div>
         </div>
 
-        {/* Wavy bottom edge */}
-        <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none rotate-180">
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{ delay: 1, duration: 2, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
+          onClick={() => window.scrollTo({ top: window.innerHeight * 0.9, behavior: 'smooth' })}
+        >
+          <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">Scroll</span>
+          <ArrowDown className="text-white/60 w-5 h-5" />
+        </motion.div>
+
+        {/* Angled Divider */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
           <svg 
-            className="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[100px]" 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
+            className="relative block w-[calc(100%+1.3px)] h-8 md:h-16" 
             viewBox="0 0 1200 120" 
             preserveAspectRatio="none"
           >
-            <path 
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-              className="fill-slate-50"
-            ></path>
+            <path d="M1200 120L0 120L0 0Z" fill="white" />
           </svg>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <main className="py-20 px-4 sm:px-6 bg-slate-50">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 sm:gap-12">
-            {/* Left: Contact Form */}
+      {/* Main Contact Section */}
+      <main className="py-32 px-4 sm:px-6 bg-white relative z-10">
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left: Large Image - No borders or shadows as requested */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative"
             >
-              <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-slate-200">
-                <h2 className="font-display text-3xl font-bold text-slate-800 mb-6">
-                  Send Us a Message
-                </h2>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name Field */}
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="font-body text-sm font-medium text-slate-700">
-                      Name *
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      placeholder="Your full name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full h-12 bg-white text-slate-900 border-slate-300 focus:border-[#6898cc] focus:ring-[#6898cc]"
-                    />
-                  </div>
-
-                  {/* Email Field */}
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="font-body text-sm font-medium text-slate-700">
-                      Email *
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="your.email@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full h-12 bg-white text-slate-900 border-slate-300 focus:border-[#6898cc] focus:ring-[#6898cc]"
-                    />
-                  </div>
-
-                  {/* Comments Field */}
-                  <div className="space-y-2">
-                    <Label htmlFor="comments" className="font-body text-sm font-medium text-slate-700">
-                      Comments *
-                    </Label>
-                    <Textarea
-                      id="comments"
-                      name="comments"
-                      placeholder="Tell us about your custom emblem project..."
-                      value={formData.comments}
-                      onChange={handleChange}
-                      required
-                      rows={6}
-                      className="w-full bg-white text-slate-900 border-slate-300 focus:border-[#6898cc] focus:ring-[#6898cc] resize-none"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full h-12 bg-[#6898cc] hover:bg-[#5a86b8] text-white font-body font-semibold text-base rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50"
-                  >
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending...
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-2">
-                        <Send className="w-5 h-5" />
-                        Send Message
-                      </span>
-                    )}
-                  </Button>
-                </form>
-              </div>
+              <img 
+                src={contactImage} 
+                alt="Custom Emblem Craftsmanship" 
+                className="w-full h-auto object-cover rounded-none"
+              />
+              {/* Optional subtle overlay to tie into theme if needed, but keeping it clean as requested */}
             </motion.div>
 
-            {/* Right: Info Card */}
+            {/* Right: Contact Form with 3D Creative Touches */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              style={{ perspective: "1200px" }}
             >
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-xl p-6 sm:p-8 text-white h-full">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-[#6898cc]/20 rounded-lg">
-                    <Mail className="w-6 h-6 text-[#6898cc]" />
-                  </div>
-                  <h2 className="font-display text-2xl font-bold">
-                    Contact Information
+              <motion.div 
+                whileHover={{ 
+                  rotateX: 1, 
+                  rotateY: -1, 
+                  y: -10,
+                  boxShadow: "0 40px 80px -15px rgba(104, 152, 204, 0.15)"
+                }}
+                className="bg-white rounded-3xl p-10 md:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] border-2 border-[#0f172a]/10 relative overflow-hidden transition-all duration-500 hover:border-[#0f172a]/30"
+              >
+                {/* Decorative background element for the card */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-[100px] -z-0" />
+                
+                <div className="relative z-10">
+                  <h2 className="font-display text-4xl font-bold text-slate-900 mb-2">
+                    Send Us a Message
                   </h2>
-                </div>
-
-                <div className="space-y-6">
-                  <p className="font-body text-white/80 leading-relaxed">
-                    If you have any questions please check the <a href="/faq" className="text-[#6898cc] hover:underline font-semibold">FAQ page</a> for an overview of the most frequently asked questions, or contact us using e-mail.
+                  <p className="font-body text-slate-500 mb-10">
+                    We typically respond to all inquiries within 24 business hours.
                   </p>
 
-                  <div className="pt-6 border-t border-white/10">
-                    <h3 className="font-display text-lg font-semibold mb-4 flex items-center gap-2">
-                      <Mail className="w-5 h-5 text-[#6898cc]" />
-                      Email
-                    </h3>
-                    <a 
-                      href="mailto:sales@yourcustomemblem.com"
-                      className="font-body text-xl text-[#6898cc] hover:text-[#7da8d8] transition-colors duration-300 break-all"
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    {/* Name Field */}
+                    <div className="space-y-3 group">
+                      <Label htmlFor="name" className="font-body text-sm font-bold text-slate-700 uppercase tracking-widest pl-1">
+                        Full Name
+                      </Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full h-14 bg-slate-50/50 text-slate-900 border-slate-200 focus:border-[#6898cc] focus:ring-[#6898cc] rounded-xl transition-all duration-300"
+                      />
+                    </div>
+
+                    {/* Email Field */}
+                    <div className="space-y-3">
+                      <Label htmlFor="email" className="font-body text-sm font-bold text-slate-700 uppercase tracking-widest pl-1">
+                        Email Address
+                      </Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full h-14 bg-slate-50/50 text-slate-900 border-slate-200 focus:border-[#6898cc] focus:ring-[#6898cc] rounded-xl transition-all duration-300"
+                      />
+                    </div>
+
+                    {/* Comments Field */}
+                    <div className="space-y-3">
+                      <Label htmlFor="comments" className="font-body text-sm font-bold text-slate-700 uppercase tracking-widest pl-1">
+                        Message Details
+                      </Label>
+                      <Textarea
+                        id="comments"
+                        name="comments"
+                        placeholder="Tell us about your project or ask a question..."
+                        value={formData.comments}
+                        onChange={handleChange}
+                        required
+                        rows={5}
+                        className="w-full bg-slate-50/50 text-slate-900 border-slate-200 focus:border-[#6898cc] focus:ring-[#6898cc] resize-none rounded-xl transition-all duration-300"
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full h-16 bg-[#313b5e] hover:bg-[#1e7ca0] text-white font-body font-bold text-lg rounded-xl transition-all duration-500 shadow-xl hover:shadow-[#2596be]/20 group"
                     >
-                      sales@yourcustomemblem.com
-                    </a>
-                  </div>
-
-                  {/* Quick Info Badges */}
-                  <div className="pt-6 space-y-3">
-                    <div className="flex items-start gap-3 p-4 bg-white/5 rounded-lg backdrop-blur-sm">
-                      <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-body text-sm font-semibold">Fast Response</p>
-                        <p className="font-body text-xs text-white/60">We reply within 24 hours</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 p-4 bg-white/5 rounded-lg backdrop-blur-sm">
-                      <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-body text-sm font-semibold">Expert Support</p>
-                        <p className="font-body text-xs text-white/60">Dedicated design team</p>
-                      </div>
-                    </div>
-                  </div>
+                      {isSubmitting ? (
+                        <span className="flex items-center gap-3">
+                          <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          PROCESSING
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-3 tracking-widest uppercase">
+                          <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                          Send Message
+                        </span>
+                      )}
+                    </Button>
+                  </form>
+                  
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
+
           </div>
         </div>
       </main>

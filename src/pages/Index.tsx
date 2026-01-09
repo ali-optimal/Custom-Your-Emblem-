@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import HeroCarousel from "@/components/HeroCarousel";
+import HeroVideo from "@/components/HeroVideo";
 import FeaturesSection from "@/components/FeaturesSection";
 import WorkSamplesSection from "@/components/WorkSamplesSection";
 import QuoteSection from "@/components/QuoteSection";
@@ -8,9 +8,9 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#070b14]">
       <Header />
-      <HeroCarousel />
+      <HeroVideo />
       <FeaturesSection />
       <WorkSamplesSection />
       <QuoteSection />

@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { Play } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Card, CardContent } from "@/components/ui/card";
 
 // Import images
 import allPhotosImg from "@/assets/gallery albums/all photos.png";
@@ -40,6 +39,71 @@ const albums = [
   { name: "Engraved emblems", count: "19", image: engravedEmblemsImg },
 ];
 
+const GalleryRow = ({ 
+  items, 
+  direction = "left", 
+  onClick 
+}: { 
+  items: typeof albums, 
+  direction?: "left" | "right", 
+  onClick: (name: string) => void 
+}) => {
+  return (
+    <div className="w-full overflow-hidden group/row h-[350px] md:h-[450px] relative bg-black border-y border-white/5">
+      <div 
+        className="flex w-fit h-full hover:pause-animation"
+        style={{
+          animation: `marquee 60s linear infinite ${direction === "right" ? "reverse" : "normal"}`,
+          width: "max-content" 
+        }}
+      >
+        {/* Render items 4 times to ensure smooth loop on wide screens */}
+        {[...items, ...items, ...items, ...items].map((album, idx) => (
+          <div 
+            key={`${album.name}-${idx}`}
+            onClick={() => onClick(album.name)}
+            className="relative w-[300px] md:w-[20vw] h-full flex-shrink-0 cursor-pointer group/item border-r border-white/10 overflow-hidden"
+          >
+            {album.isVideo ? (
+              <div className="absolute inset-0 bg-zinc-900 flex flex-col items-center justify-center group-hover/item:scale-105 transition-transform duration-700">
+                <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center group-hover/item:bg-white/10 transition-colors z-10">
+                  <Play className="w-6 h-6 text-white ml-1" />
+                </div>
+                {/* Abstract pattern bg for video placeholder */}
+                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, #333 1px, transparent 1px)", backgroundSize: "20px 20px" }}></div>
+              </div>
+            ) : (
+              <img 
+                src={album.image} 
+                alt={album.name}
+                className="w-full h-full object-cover transition-all duration-700 group-hover/item:scale-110 group-hover/item:blur-[2px]"
+              />
+            )}
+            
+            {/* Bottom Gradient overlay matching footer color */}
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0f172a] to-transparent pointer-events-none opacity-90 z-10" />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/60 md:bg-black/0 group-hover/item:bg-black/40 transition-colors duration-500 flex flex-col items-center justify-center z-20">
+               <div className="text-center p-4 transform translate-y-0 md:translate-y-8 opacity-100 md:opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100 transition-all duration-500">
+                  <span className="font-body text-[10px] tracking-[0.2em] uppercase text-blue-400 mb-2 block">
+                    Collection
+                  </span>
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-white uppercase tracking-wider mb-2">
+                    {album.name.replace("photos", "").replace(" collection", "")}
+                  </h3>
+                   <span className="font-body text-xs text-white/60">
+                    {album.count} shots
+                  </span>
+               </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Gallery = () => {
   const navigate = useNavigate();
 
@@ -52,117 +116,56 @@ const Gallery = () => {
     navigate(`/gallery/${slug}`);
   };
 
+  const row1 = albums.slice(0, 5);
+  const row2 = albums.slice(5, 10);
+  const row3 = albums.slice(10, 15);
+
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-black">
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-25%); } /* Since we quadrupled the items, 1 set is 25% */
+        }
+        .hover\\:pause-animation:hover {
+          animation-play-state: paused !important;
+        }
+      `}</style>
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-black pt-32 pb-32 overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 rounded-full border border-white/10 opacity-30" />
-        <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full border border-white/5 opacity-40" />
+      <section 
+        className="relative pt-40 pb-20 overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" }}
+      >
+        <div className="absolute inset-0 z-0 opacity-20" style={{ 
+          backgroundImage: "linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px)", 
+          backgroundSize: "40px 40px" 
+        }}></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
         
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="inline-flex items-center gap-3 mb-4">
-                <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-white/40" />
-                <span className="font-body text-xs tracking-[0.3em] uppercase text-white/60">
-                  Our Portfolio
-                </span>
-                <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-white/40" />
-              </div>
-              
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6">
-                Gallery
-              </h1>
-              <p className="max-w-2xl mx-auto text-white/60 font-body text-lg">
-                Explore our collection of custom emblems across various categories.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Wavy bottom edge - Rotated to curve upwards */}
-        <div className="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none rotate-180">
-          <svg 
-            className="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[100px]" 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none"
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
           >
-            <path 
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-              className="fill-slate-50"
-            ></path>
-          </svg>
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/10 mb-4 tracking-tighter">
+              MASTERPIECES
+            </h1>
+            <p className="font-body text-[#6898cc] tracking-[0.1em] uppercase text-sm md:text-base mb-8 font-semibold">
+              Automotive Jewelry Collection
+            </p>
+            <div className="w-24 h-1 bg-[#6898cc] mx-auto rounded-full"></div>
+          </motion.div>
         </div>
       </section>
       
-      {/* Albums Content Section */}
-      <main className="py-20 px-4 sm:px-6 bg-slate-50">
-        <div className="container mx-auto">
-          {/* Albums Grid - 3 rows and 5 columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {albums.map((album, index) => (
-              <motion.div
-                key={album.name}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.7, delay: index * 0.08, ease: "easeOut" }}
-              >
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => handleAlbumClick(album.name)}
-                >
-                  <div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-xl transition-all duration-500 hover:shadow-2xl hover:shadow-[#6898cc]/10 hover:-translate-y-2">
-                    {/* Image Container with Aspect Ratio */}
-                    <div className="aspect-[4/5] w-full overflow-hidden relative">
-                      {album.isVideo ? (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900 group-hover:bg-slate-800 transition-colors duration-500">
-                           <div className="relative z-10 w-20 h-20 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg">
-                            <div className="absolute inset-0 rounded-full bg-[#6898cc]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <Play className="w-8 h-8 text-white fill-white relative z-10 ml-1" />
-                          </div>
-                          <span className="font-body text-xs uppercase tracking-[0.2em] text-white/50 group-hover:text-white/80 transition-colors duration-500">
-                            Video Collection
-                          </span>
-                        </div>
-                      ) : (
-                        <>
-                          <img 
-                            src={album.image} 
-                            alt={album.name}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
-                          {/* Very subtle gradient only at bottom for depth */}
-                          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-                        </>
-                      )}
-                      
-                      {/* Shine effect on hover */}
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                    </div>
-                  </div>
-
-                  {/* Title outside card - Clean & Modern */}
-                  <div className="mt-4 text-center">
-                    <h3 className="font-display text-lg font-medium text-slate-800 group-hover:text-[#6898cc] transition-colors duration-300">
-                      {album.name}
-                    </h3>
-                    <div className="h-[1px] w-0 bg-[#6898cc] mx-auto mt-2 transition-all duration-300 group-hover:w-12 opacity-50" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+      {/* Marquee Rows */}
+      <main className="relative z-10 bg-[#0f172a]">
+        <GalleryRow items={row1} direction="left" onClick={handleAlbumClick} />
+        <GalleryRow items={row2} direction="right" onClick={handleAlbumClick} />
+        <GalleryRow items={row3} direction="left" onClick={handleAlbumClick} />
       </main>
 
       <Footer />

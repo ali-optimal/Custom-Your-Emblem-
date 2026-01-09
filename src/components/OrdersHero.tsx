@@ -38,7 +38,10 @@ const OrdersHero = () => {
   }, [nextSlide]);
 
   return (
-    <section className="relative h-[70vh] min-h-[500px] w-full overflow-hidden bg-black">
+    <section 
+      className="relative h-[70vh] min-h-[500px] w-full overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)" }}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={activeIndex}
@@ -58,7 +61,7 @@ const OrdersHero = () => {
           />
           
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/60 via-[#0f172a]/20 to-[#0f172a]/80" />
           
           {/* Content */}
           <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
