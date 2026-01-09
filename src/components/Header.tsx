@@ -19,8 +19,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const isHomePage = location.pathname === "/";
-  // Always use luxury background to ensure it's visible at the top as requested
-  const useLuxuryBg = true;
+  const useLuxuryBg = !isHomePage || scrolled;
 
   useEffect(() => {
     const handleScroll = () => {

@@ -12,8 +12,10 @@ import outlawPhotosImg from "@/assets/gallery albums/Outloaw photos.png";
 import porschePhotosImg from "@/assets/gallery albums/Porsche photos.png";
 import randomDesignsImg from "@/assets/gallery albums/Random designs.png";
 import rwbPorscheImg from "@/assets/gallery albums/RWB Porsche photos.png";
+import headerLogo from "@/assets/Gemini_Generated_Image_jrw14vjrw14vjrw1 (1).png";
 
 const imagesToPreload = [
+  headerLogo,
   allPhotosImg,
   bikesPhotosImg,
   boatsPhotosImg,
